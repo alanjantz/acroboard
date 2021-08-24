@@ -2,17 +2,9 @@
     "name": "PlayerController",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Rotation",
             "id": "e7b90d05-e3e3-4af4-b4a4-47aa7f798c1f",
             "actions": [
-                {
-                    "name": "Walk",
-                    "type": "Value",
-                    "id": "bd8bbe7a-e3d3-45a8-9766-05412b48742d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
                 {
                     "name": "HorizontalRotation",
                     "type": "Value",
@@ -31,17 +23,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "dba3a443-7cd3-4617-af5b-60da7eefe31a",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "Right Stick",
                     "id": "29e039c2-d58e-47a7-87b3-c0bac5acf500",
@@ -105,6 +86,96 @@
                     "processors": "",
                     "groups": "",
                     "action": "VerticalRotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        },
+        {
+            "name": "Movement",
+            "id": "7b7bb409-ab77-48bd-8ebc-7535e0f93ae3",
+            "actions": [
+                {
+                    "name": "HorizontalMovement",
+                    "type": "Value",
+                    "id": "3827a710-c0f3-4557-8203-d89e7663fa75",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "VerticalMovement",
+                    "type": "Value",
+                    "id": "2415fc9c-ee78-410a-b139-7c43da3a6ab9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Left Stick",
+                    "id": "84696a97-d829-4ca3-86d5-4111be02a95b",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "93dadc11-b175-46ae-8eec-e4fddf207112",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "32464caf-ea7b-432a-b0be-9e1b84d9c957",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Left Stick",
+                    "id": "b70d6f80-067c-49d2-9307-3abda26b44fc",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "7b34c3e1-df01-4a51-ba56-a2d0f8fb26b3",
+                    "path": "<Gamepad>/leftStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "78e9db8d-39ba-4e89-aa2c-94f372d27ef9",
+                    "path": "<Gamepad>/leftStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
                 }

@@ -39,7 +39,7 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Move(float aux)
     {
-        var platformPosition = platform.transform.up * aux * speed * Time.deltaTime;
+        var platformPosition = aux * speed * Time.deltaTime * platform.transform.up;
 
         if (platformPosition.y + platform.transform.position.y > 2f)
         {
@@ -53,7 +53,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         Vector3 move = transform.right * horizontalRotation + transform.forward * verticalRotation;
 
-        controller.Move(move * speed * Time.deltaTime);
+        controller.Move(speed * Time.deltaTime * move);
 
         if (isUpPressed)
             Move(1);

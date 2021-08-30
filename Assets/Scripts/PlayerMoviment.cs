@@ -10,8 +10,7 @@ public class PlayerMoviment : MonoBehaviour
     private float horizontalRotation;
     private float verticalRotation;
 
-    private bool isUpPressed = false;
-    private bool isDownPressed = false;
+    private PlayerMovimentState state = PlayerMovimentState.StandingBy;
 
     private float initialPosition = 0f;
 
@@ -36,13 +35,21 @@ public class PlayerMoviment : MonoBehaviour
 
     void OnGoUp(InputValue input)
     {
-        isUpPressed = !isUpPressed;
+        state = GetNewState(PlayerMovimentState.GoingUp);
     }
 
     void OnGoDown(InputValue input)
     {
-        isDownPressed = !isDownPressed;
+        state = GetNewState(PlayerMovimentState.GoingDown);
     }
+
+    void OnReset(InputValue input)
+    {
+        state = GetNewState(PlayerMovimentState.Reseting);
+    }
+
+    PlayerMovimentState GetNewState(PlayerMovimentState newState)
+        => state == newState ? PlayerMovimentState.StandingBy : newState;
 
     private void Move(float aux)
     {
@@ -54,6 +61,10 @@ public class PlayerMoviment : MonoBehaviour
 
             controller.Move(transform.up * aux * speed * Time.deltaTime);
         }
+        else if (state == PlayerMovimentState.Reseting)
+        {
+            state = PlayerMovimentState.StandingBy;
+        }
     }
 
     void Update()
@@ -62,9 +73,18 @@ public class PlayerMoviment : MonoBehaviour
 
         controller.Move(speed * Time.deltaTime * move);
 
-        if (isUpPressed)
-            Move(1);
-        else if (isDownPressed)
-            Move(-1);
+        switch (state)
+        {
+            case PlayerMovimentState.GoingUp:
+                Move(1);
+                break;
+            case PlayerMovimentState.GoingDown:
+            case PlayerMovimentState.Reseting:
+                Move(-1);
+                break;
+            case PlayerMovimentState.StandingBy:
+            default:
+                break;
+        }
     }
 }

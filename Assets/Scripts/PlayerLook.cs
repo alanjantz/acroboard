@@ -11,16 +11,9 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     private float verticalRotation;
 
-    void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-    }
-
     void OnHorizontalRotation(InputValue input)
     {
         var value = input.Get<float>();
-
-        Debug.Log($"OnHorizontalRotation: {value}");
 
         horizontalRotation = value;
     }

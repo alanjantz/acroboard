@@ -13,6 +13,13 @@ public class PlayerMoviment : MonoBehaviour
     private bool isUpPressed = false;
     private bool isDownPressed = false;
 
+    private float initialPosition = 0f;
+
+    private void Awake()
+    {
+        initialPosition = platform.transform.position.y;
+    }
+
     void OnHorizontalMovement(InputValue input)
     {
         var value = input.Get<float>();
@@ -41,7 +48,7 @@ public class PlayerMoviment : MonoBehaviour
     {
         var platformPosition = aux * speed * Time.deltaTime * platform.transform.up;
 
-        if (platformPosition.y + platform.transform.position.y > 2f)
+        if (platformPosition.y + platform.transform.position.y > initialPosition)
         {
             platform.transform.position += platformPosition;
 

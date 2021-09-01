@@ -7,9 +7,6 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/City.unity
-    guid: d4e37ce482d98a44894c118c9ffc655f
-  - enabled: 0
-    path: Assets/Scenes/HelloCardboard.unity
-    guid: 145a2a45d7bc746b19cb68410368bf96
+    guid: 47f1ba7f9ee22a74dbb965f9a3193af5
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 9065777afdf2f1b4aada2ce84a6b42c3, type: 2}

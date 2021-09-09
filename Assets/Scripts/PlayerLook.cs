@@ -11,6 +11,15 @@ public class PlayerLook : MonoBehaviour
     private float xRotation = 0f;
     private float verticalRotation;
 
+    private static PlayerLook _instance;
+
+    public static PlayerLook GetInstance() => _instance;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
     void OnHorizontalRotation(InputValue input)
     {
         var value = input.Get<float>();

@@ -3,5 +3,6 @@
     StandingBy = 0,
     GoingUp,
     GoingDown,
-    Reseting
+    Reseting,
+    GoingToHighest
 }

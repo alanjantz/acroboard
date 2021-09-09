@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class PlayerMoviment : MonoBehaviour
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
 
     private float initialPosition = 0f;
+    public float maxHeight = 80f;
 
     private void Awake()
     {
@@ -48,20 +50,37 @@ public class PlayerMoviment : MonoBehaviour
         state = GetNewState(PlayerMovimentState.Reseting);
     }
 
+    void OnGoToHighest(InputValue input)
+    {
+        state = GetNewState(PlayerMovimentState.GoingToHighest);
+    }
+
     PlayerMovimentState GetNewState(PlayerMovimentState newState)
         => state == newState ? PlayerMovimentState.StandingBy : newState;
 
-    private void Move(float aux)
+    private void GoUp(float limit)
+    {
+        Move(1, limit, (limit, next) => next <= limit);
+    }
+
+    private void GoDown(float limit)
+    {
+        Move(-1, limit, (limit, next) => next >= limit);
+    }
+
+    private void Move(int aux, float limit, Func<float, float, bool> comparison)
     {
         var platformPosition = aux * speed * Time.deltaTime * platform.transform.up;
 
-        if (platformPosition.y + platform.transform.position.y > initialPosition)
+        var nextHeight = platformPosition.y + platform.transform.position.y;
+
+        if (comparison(limit, nextHeight))
         {
             platform.transform.position += platformPosition;
 
-            controller.Move(transform.up * aux * speed * Time.deltaTime);
+            controller.Move(aux * speed * Time.deltaTime * transform.up);
         }
-        else if (state == PlayerMovimentState.Reseting)
+        else
         {
             state = PlayerMovimentState.StandingBy;
         }
@@ -76,11 +95,12 @@ public class PlayerMoviment : MonoBehaviour
         switch (state)
         {
             case PlayerMovimentState.GoingUp:
-                Move(1);
+            case PlayerMovimentState.GoingToHighest:
+                GoUp(maxHeight);
                 break;
             case PlayerMovimentState.GoingDown:
             case PlayerMovimentState.Reseting:
-                Move(-1);
+                GoDown(initialPosition);
                 break;
             case PlayerMovimentState.StandingBy:
             default:

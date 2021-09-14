@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,6 +8,7 @@ public class PlayerMoviment : MonoBehaviour
     public CharacterController controller;
     public float speed = 12f;
     public GameObject platform;
+    public GameObject heightInfo;
 
     private float horizontalRotation;
     private float verticalRotation;
@@ -14,7 +16,7 @@ public class PlayerMoviment : MonoBehaviour
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
 
     private float initialPosition = 0f;
-    public float maxHeight = 80f;
+    public float maxHeight = 80;
 
     private void Awake()
     {
@@ -106,5 +108,20 @@ public class PlayerMoviment : MonoBehaviour
             default:
                 break;
         }
+
+        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue()}m";
+    }
+
+    private double GetHeightValue()
+    {
+        float divisor = 2.5f;
+        float equivalentMaxHeight = maxHeight / divisor;
+
+        var result = platform.transform.position.y / divisor;
+
+        if (result >= equivalentMaxHeight - 0.5f)
+            return Math.Ceiling(equivalentMaxHeight);
+
+        return Math.Truncate(result);
     }
 }

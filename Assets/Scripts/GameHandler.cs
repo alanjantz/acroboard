@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameHandler : MonoBehaviour
     public static GameHandler GetInstance() => _instance;
 
     public GameObject PointSphere;
+    public GameObject levelInfo;
 
     private readonly Queue<Level> levels = new Queue<Level>();
 
@@ -41,6 +43,8 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
+        string currentLevel = "Total de pontos";
+
         if (!gameEnded)
         {
             if (pointSpheres.Count == 0)
@@ -58,8 +62,6 @@ public class GameHandler : MonoBehaviour
                         _currentLevel.SetStartTime(DateTime.Now.AddSeconds(secondsInterval));
 
                     _stage++;
-
-                    Debug.Log($"LEVEL {_stage}");
                 }
 
                 if (_currentLevel.StartTime.GetValueOrDefault() <= DateTime.Now)
@@ -74,12 +76,12 @@ public class GameHandler : MonoBehaviour
                     _currentLevel = null;
                 }
             }
+
+            currentLevel = $"Nível {_stage}";
         }
-        else
-        {
-            Debug.Log($"--- LEVEL {_stage} ENDED ---");
-            Debug.Log($"Points {GameScore.GetInstance().CurrentScore}");
-        }
+
+        levelInfo.gameObject.transform.Find("Label").GetComponent<TextMeshPro>().text = currentLevel;
+        levelInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = GameScore.GetInstance().CurrentScore.ToString();
     }
 
     public void RemovePoint(GameObject point)

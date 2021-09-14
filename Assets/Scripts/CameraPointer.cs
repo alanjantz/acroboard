@@ -1,21 +1,42 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CameraPointer : MonoBehaviour
 {
-    private const float _maxDistance = 25f;
+    public Transform playerBody;
+
+    public float sensitivity = 150f;
+
+    private const float _maxDistance = 50f;
     private GameObject _gazedAtObject = null;
 
-    private PlayerLook _playerLook;
+    private float horizontalRotation;
+    private float xRotation = 0f;
+    private float verticalRotation;
 
-    private void Awake()
+    void OnHorizontalRotation(InputValue input)
     {
-        _playerLook = PlayerLook.GetInstance();
+        var value = input.Get<float>();
+
+        horizontalRotation = value;
+    }
+
+    void OnVerticalRotation(InputValue input)
+    {
+        var value = input.Get<float>();
+
+        verticalRotation = value;
     }
 
     public void Update()
     {
         // Fazer o objeto do player virar para a posição que ele está olhando
-        // _playerLook.playerBody.Rotate(transform.forward);
+        // playerBody.LookAt(transform.forward);
+
+#if UNITY_EDITOR
+        Debug.Log("Unity Editor Rotate");
+        Rotate();
+#endif
 
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
         {
@@ -24,12 +45,26 @@ public class CameraPointer : MonoBehaviour
                 _gazedAtObject = hit.transform.gameObject;
 
                 if (_gazedAtObject.CompareTag(Constants.PointSphereTag))
-                    _gazedAtObject.SendMessage("OnRemove");
+                    _gazedAtObject.SendMessage("OnLook");
             }
         }
         else
         {
             _gazedAtObject = null;
         }
+    }
+
+    void Rotate()
+    {
+        float xAxis = horizontalRotation * sensitivity * Time.deltaTime;
+        float yAxis = verticalRotation * sensitivity * Time.deltaTime;
+
+        xRotation -= yAxis;
+
+        if (xRotation <= -360f)
+            xRotation = 0f;
+
+        transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        playerBody.Rotate(Vector3.up * xAxis);
     }
 }

@@ -7026,8 +7026,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1788989735}
-  - {fileID: 1957066960}
   - {fileID: 689010389}
+  - {fileID: 1957066960}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9294,7 +9294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0pt
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12919,7 +12919,7 @@ Transform:
   - {fileID: 1709750540}
   - {fileID: 1015671712}
   m_Father: {fileID: 375979028}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &689189463
 GameObject:
@@ -15277,7 +15277,6 @@ GameObject:
   - component: {fileID: 812240930}
   - component: {fileID: 812240929}
   - component: {fileID: 812240928}
-  - component: {fileID: 812240927}
   - component: {fileID: 812240926}
   m_Layer: 0
   m_Name: Main Camera
@@ -15330,20 +15329,6 @@ MonoBehaviour:
   m_DefaultActionMap: Rotation
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &812240927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812240924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f521fb1ec589f43934e49d764f12c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseSensitivity: 150
-  playerBody: {fileID: 1957066960}
 --- !u!114 &812240928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15356,6 +15341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aebfb4b86b2e54606894da54f755db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sensitivity: 150
+  playerBody: {fileID: 1957066960}
 --- !u!114 &812240929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15414,7 +15401,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.03
-  far clip plane: 3000
+  far clip plane: 1000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -39475,7 +39462,7 @@ Transform:
   - {fileID: 1964748027}
   - {fileID: 1195227138}
   m_Father: {fileID: 375979028}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1957066961
 MonoBehaviour:

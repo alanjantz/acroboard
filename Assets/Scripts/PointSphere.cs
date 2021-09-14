@@ -9,7 +9,7 @@ public class PointSphere : MonoBehaviour
         _gameHandler = GameHandler.GetInstance();
     }
 
-    public void OnRemove()
+    public void OnLook()
     {
         GameScore.GetInstance().AddPoint();
         _gameHandler.RemovePoint(this.transform.parent.gameObject);

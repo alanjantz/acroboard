@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
@@ -80,8 +79,8 @@ public class GameHandler : MonoBehaviour
             currentLevel = $"Nível {_stage}";
         }
 
-        levelInfo.gameObject.transform.Find("Label").GetComponent<TextMeshPro>().text = currentLevel;
-        levelInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = GameScore.GetInstance().CurrentScore.ToString();
+        levelInfo.gameObject.SetTextMeshProValue(currentLevel, "Label");
+        levelInfo.gameObject.SetTextMeshProValue(GameScore.GetInstance().CurrentScore.ToString());
     }
 
     public void RemovePoint(GameObject point)

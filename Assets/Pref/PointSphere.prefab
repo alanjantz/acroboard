@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5531602281689560705}
   - component: {fileID: 7371584477041482670}
   - component: {fileID: 7921208874465660275}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Point Sphere
   m_Icon: {fileID: 0}
@@ -118,7 +118,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4156022728584815807}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PointSphere
   m_TagString: Point Sphere
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4884497789651703287}
   - component: {fileID: 3086474619744766039}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

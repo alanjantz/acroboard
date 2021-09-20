@@ -6,12 +6,23 @@ public class Level
 {
     public List<Vector3> Positions { get; private set; } = new List<Vector3>();
     public DateTime? StartTime { get; private set; }
+    public int Stage { get; private set; }
 
-    public Level() { }
+    public const float MinDistance = 5f;
 
-    public Level(DateTime startTime)
+    public Level(int stage)
+    {
+        SetStage(stage);
+    }
+
+    public Level(int stage, DateTime startTime) : this(stage)
     {
         SetStartTime(startTime);
+    }
+
+    public void SetStage(int stage)
+    {
+        this.Stage = stage;
     }
 
     public void SetStartTime(DateTime startTime)
@@ -19,7 +30,7 @@ public class Level
         StartTime = startTime;
     }
 
-    public void Add(Vector3 position)
+    public void AddPoint(Vector3 position)
     {
         Positions.Add(position);
     }
@@ -27,5 +38,13 @@ public class Level
     public override string ToString()
     {
         return $"{StartTime:dd/MM/yyyy HH:mm:ss} - {Positions.Count} position(s)";
+    }
+
+    public bool ContainsPointNear(Vector3 randomPoint)
+    {
+        foreach (var point in Positions)
+            if (Vector3.Distance(randomPoint, point) <= MinDistance)
+                return true;
+        return false;
     }
 }

@@ -8,7 +8,7 @@ public class Level
     public DateTime? StartTime { get; private set; }
     public int Stage { get; private set; }
 
-    public const float MinDistance = 10f;
+    public const float MinDistance = 5f;
 
     public Level(int stage)
     {
@@ -43,12 +43,11 @@ public class Level
     public bool ContainsPointNear(Vector3 randomPoint)
     {
         foreach (var point in Positions)
+        {
+            Debug.LogWarning($"A distância entre {randomPoint} e {point} é de {Vector3.Distance(randomPoint, point)}");
             if (Vector3.Distance(randomPoint, point) <= MinDistance)
-            {
-                Debug.LogWarning($"A distância entre {randomPoint} e {point} é de {Vector3.Distance(randomPoint, point)}");
                 return true;
-            }
-
+        }
         return false;
     }
 }

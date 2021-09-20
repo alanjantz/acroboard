@@ -7,13 +7,13 @@ public static class LevelGenerator
     private static readonly Dictionary<int, List<LevelPointRange>> pointRangePerLevel = new Dictionary<int, List<LevelPointRange>>()
     {
         [0] = PointRangeGenerator.Generate(3, 01, 10),
-        [1] = PointRangeGenerator.Generate(4, 10, 20),
-        [2] = PointRangeGenerator.Generate(5, 20, 30),
-        [3] = PointRangeGenerator.Generate(5, 30, 40),
-        [4] = PointRangeGenerator.Generate(6, 40, 50),
-        [5] = PointRangeGenerator.Generate(6, 50, 60),
-        [6] = PointRangeGenerator.Generate(7, 60, 70),
-        [7] = PointRangeGenerator.Generate(8, 70, 80),
+        [1] = PointRangeGenerator.Generate(4, 05, 25),
+        [2] = PointRangeGenerator.Generate(5, 15, 35),
+        [3] = PointRangeGenerator.Generate(5, 25, 45),
+        [4] = PointRangeGenerator.Generate(6, 35, 55),
+        [5] = PointRangeGenerator.Generate(6, 45, 65),
+        [6] = PointRangeGenerator.Generate(7, 55, 75),
+        [7] = PointRangeGenerator.Generate(8, 65, 85),
     };
 
     private static readonly List<LevelPointRange> defaultPointRanges = PointRangeGenerator.Generate(5, 1, PlayerMoviment.MaxHeight);

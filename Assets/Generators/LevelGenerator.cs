@@ -31,7 +31,15 @@ public static class LevelGenerator
             if (pointRangePerLevel.ContainsKey(stage))
                 pointsRange = pointRangePerLevel[stage];
 
-            level.AddPoints(pointsRange.Select(pr => pr.GetRandomRange()));
+            foreach (var pointRange in pointsRange)
+            {
+                var randomPoint = pointRange.GetRandomRange();
+
+                while (level.ContainsPointNear(randomPoint))
+                    randomPoint = pointRange.GetRandomRange();
+
+                level.AddPoint(randomPoint);
+            }
 
             result.Enqueue(level);
         }

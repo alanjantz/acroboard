@@ -15,6 +15,8 @@ public class LevelPointRange
     {
         var randomizer = new System.Random();
 
-        return new Vector3(randomizer.NextFloat(Min.x, Max.x), randomizer.NextFloat(Min.y, Max.y), randomizer.NextFloat(Min.z, Max.z));
+        var result = new Vector3(randomizer.NextFloat(Min.x, Max.x), randomizer.NextFloat(Min.y, Max.y), randomizer.NextFloat(Min.z, Max.z));
+        Debug.Log($"Min: {Min} // Max: {Max} // Result: {result}");
+        return result;
     }
 }

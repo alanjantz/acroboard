@@ -8,6 +8,8 @@ public class Level
     public DateTime? StartTime { get; private set; }
     public int Stage { get; private set; }
 
+    public const float MinDistance = 10f;
+
     public Level(int stage)
     {
         SetStage(stage);
@@ -28,13 +30,25 @@ public class Level
         StartTime = startTime;
     }
 
-    public void AddPoints(IEnumerable<Vector3> positions)
+    public void AddPoint(Vector3 position)
     {
-        Positions.AddRange(positions);
+        Positions.Add(position);
     }
 
     public override string ToString()
     {
         return $"{StartTime:dd/MM/yyyy HH:mm:ss} - {Positions.Count} position(s)";
+    }
+
+    public bool ContainsPointNear(Vector3 randomPoint)
+    {
+        foreach (var point in Positions)
+            if (Vector3.Distance(randomPoint, point) <= MinDistance)
+            {
+                Debug.LogWarning($"A distância entre {randomPoint} e {point} é de {Vector3.Distance(randomPoint, point)}");
+                return true;
+            }
+
+        return false;
     }
 }

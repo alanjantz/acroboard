@@ -16,7 +16,7 @@ public class PlayerMoviment : MonoBehaviour
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
 
     private float initialPosition = 0f;
-    public float maxHeight = 80;
+    public static float MaxHeight = 80;
 
     private void Awake()
     {
@@ -98,7 +98,7 @@ public class PlayerMoviment : MonoBehaviour
         {
             case PlayerMovimentState.GoingUp:
             case PlayerMovimentState.GoingToHighest:
-                GoUp(maxHeight);
+                GoUp(MaxHeight);
                 break;
             case PlayerMovimentState.GoingDown:
             case PlayerMovimentState.Reseting:
@@ -115,7 +115,7 @@ public class PlayerMoviment : MonoBehaviour
     private double GetHeightValue()
     {
         float divisor = 2.5f;
-        float equivalentMaxHeight = maxHeight / divisor;
+        float equivalentMaxHeight = MaxHeight / divisor;
 
         var result = platform.transform.position.y / divisor;
 

@@ -20114,7 +20114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1060811779
 Transform:
   m_ObjectHideFlags: 0
@@ -39607,7 +39607,6 @@ MonoBehaviour:
   speed: 12
   platform: {fileID: 1788989734}
   heightInfo: {fileID: 1354937720}
-  maxHeight: 80
 --- !u!143 &1957066963
 CharacterController:
   m_ObjectHideFlags: 0

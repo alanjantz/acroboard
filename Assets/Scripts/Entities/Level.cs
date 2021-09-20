@@ -6,12 +6,21 @@ public class Level
 {
     public List<Vector3> Positions { get; private set; } = new List<Vector3>();
     public DateTime? StartTime { get; private set; }
+    public int Stage { get; private set; }
 
-    public Level() { }
+    public Level(int stage)
+    {
+        SetStage(stage);
+    }
 
-    public Level(DateTime startTime)
+    public Level(int stage, DateTime startTime) : this(stage)
     {
         SetStartTime(startTime);
+    }
+
+    public void SetStage(int stage)
+    {
+        this.Stage = stage;
     }
 
     public void SetStartTime(DateTime startTime)
@@ -19,9 +28,9 @@ public class Level
         StartTime = startTime;
     }
 
-    public void Add(Vector3 position)
+    public void AddPoints(IEnumerable<Vector3> positions)
     {
-        Positions.Add(position);
+        Positions.AddRange(positions);
     }
 
     public override string ToString()

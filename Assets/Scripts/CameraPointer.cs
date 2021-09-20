@@ -34,7 +34,6 @@ public class CameraPointer : MonoBehaviour
         // playerBody.LookAt(transform.forward);
 
 #if UNITY_EDITOR
-        Debug.Log("Unity Editor Rotate");
         Rotate();
 #endif
 

@@ -27,17 +27,9 @@ public class GameHandler : MonoBehaviour
         _instance = this;
     }
 
-    private void Start()
+    public GameHandler()
     {
-        var firstLevel = new Level(gameStartedTime.AddSeconds(secondsInterval));
-        firstLevel.Add(new Vector3(1, 6, 45));
-        firstLevel.Add(new Vector3(1, 6, 20));
-        levels.Enqueue(firstLevel);
-
-        var secondLevel = new Level();
-        secondLevel.Add(new Vector3(-10, 6, 30));
-        secondLevel.Add(new Vector3(10, 6, 30));
-        levels.Enqueue(secondLevel);
+        levels = LevelGenerator.Genetare(gameStartedTime.AddSeconds(secondsInterval));
     }
 
     private void Update()
@@ -60,7 +52,7 @@ public class GameHandler : MonoBehaviour
                     if (!_currentLevel.StartTime.HasValue)
                         _currentLevel.SetStartTime(DateTime.Now.AddSeconds(secondsInterval));
 
-                    _stage++;
+                    _stage = _currentLevel.Stage;
                 }
 
                 if (_currentLevel.StartTime.GetValueOrDefault() <= DateTime.Now)
@@ -76,11 +68,11 @@ public class GameHandler : MonoBehaviour
                 }
             }
 
-            currentLevel = $"Nível {_stage}";
+            currentLevel = $"Nível {_stage} ({pointSpheres.Count})";
         }
 
-        levelInfo.gameObject.SetTextMeshProValue(currentLevel, "Label");
-        levelInfo.gameObject.SetTextMeshProValue(GameScore.GetInstance().CurrentScore.ToString());
+        levelInfo.SetTextMeshProValue(currentLevel, "Label");
+        levelInfo.SetTextMeshProValue(GameScore.GetInstance().CurrentScore.ToString());
     }
 
     public void RemovePoint(GameObject point)

@@ -16,12 +16,20 @@ public static class PointRangeGenerator
     public static List<LevelPointRange> Generate(int pointsAmount, float heightMin, float heightMax)
     {
         var result = new List<LevelPointRange>();
+        var usedRanges = new List<int>();
 
         for (int i = 0; i < pointsAmount; i++)
         {
-            // TODO: Salvar indexes já pegos e impedir que seja pego novamente
-            // até que todos os itens do PointsRange sejam pegos
-            var range = PointsRange[Randomizer.Next(0, PointsRange.Count)];
+            var index = Randomizer.Next(0, PointsRange.Count);
+
+            if (usedRanges.Count < 4)
+                while (usedRanges.Contains(index))
+                    index = Randomizer.Next(0, PointsRange.Count);
+            else
+                usedRanges.Clear();
+            usedRanges.Add(index);
+
+            var range = PointsRange[index];
 
             result.Add(new LevelPointRange(new Vector3(range.Min.x, heightMin, range.Min.y), new Vector3(range.Max.x, heightMax, range.Max.y)));
         }

@@ -43,11 +43,8 @@ public class Level
     public bool ContainsPointNear(Vector3 randomPoint)
     {
         foreach (var point in Positions)
-        {
-            Debug.LogWarning($"A distância entre {randomPoint} e {point} é de {Vector3.Distance(randomPoint, point)}");
             if (Vector3.Distance(randomPoint, point) <= MinDistance)
                 return true;
-        }
         return false;
     }
 }

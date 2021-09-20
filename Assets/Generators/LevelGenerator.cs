@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 public static class LevelGenerator
 {
@@ -18,7 +16,7 @@ public static class LevelGenerator
 
     private static readonly List<LevelPointRange> defaultPointRanges = PointRangeGenerator.Generate(5, 1, PlayerMoviment.MaxHeight);
 
-    public static Queue<Level> Genetare(DateTime startTime, int amount = 8)
+    public static Queue<Level> Genetare(int amount = 8)
     {
         var result = new Queue<Level>();
 
@@ -43,8 +41,6 @@ public static class LevelGenerator
 
             result.Enqueue(level);
         }
-
-        result.First().SetStartTime(startTime);
 
         return result;
     }

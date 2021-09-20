@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour
 
     public GameHandler()
     {
-        levels = LevelGenerator.Genetare(gameStartedTime.AddSeconds(secondsInterval));
+        levels = LevelGenerator.Genetare();
     }
 
     private void Update()

@@ -9,16 +9,9 @@ public class GameScore : MonoBehaviour
     public float currentPointValue = 5f;
     public float CurrentScore { get; private set; } = 0f;
 
-    private SoundManager soundManager;
-
-    private void Awake()
-    {
-        _instance = this;
-    }
-
     private void Start()
     {
-        soundManager = SoundManager.GetInstance();
+        _instance = this;
     }
 
     public void AddPoint() => AddPoints(1);
@@ -26,7 +19,7 @@ public class GameScore : MonoBehaviour
     public void AddPoints(int amount)
     {
         CurrentScore += currentPointValue * amount;
-        soundManager.PlaySound(Sounds.Point);
+        SoundManager.GetInstance().PlaySound(Sounds.Point);
     }
 
     public void IncreasePoints(float newPoints) => currentPointValue += newPoints;

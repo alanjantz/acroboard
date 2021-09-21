@@ -1,15 +1,25 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public static class SoundManager
+public class SoundManager : MonoBehaviour
 {
-    public static void PlaySound(Sounds sound)
+    private static SoundManager _instance;
+
+    public static SoundManager GetInstance() => _instance;
+
+    public SoundAudioClip[] SoundAudioClips;
+
+    private void Start()
     {
-        var gameObject = new GameObject("Sound", typeof(AudioSource));
-        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+        _instance = this;
+    }
+
+    public void PlaySound(Sounds sound)
+    {
+        AudioSource audioSource = this.GetComponent<AudioSource>();
         audioSource.PlayOneShot(GetAudioClip(sound));
     }
 
-    private static AudioClip GetAudioClip(Sounds sound)
-        => GameHandler.GetInstance().SoundAudioClips.FirstOrDefault(audio => audio.Sound == sound)?.AudioClip;
+    private AudioClip GetAudioClip(Sounds sound)
+        => SoundAudioClips.FirstOrDefault(audio => audio.Sound == sound)?.AudioClip;
 }

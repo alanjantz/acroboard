@@ -16,13 +16,11 @@ public class GameHandler : MonoBehaviour
     public readonly List<GameObject> pointSpheres = new List<GameObject>();
     private Level _currentLevel;
     private int _stage = 0;
-    private DateTime gameStartedTime;
     private int secondsInterval;
     private bool gameEnded;
 
     private void Awake()
     {
-        gameStartedTime = DateTime.Now;
         secondsInterval = 5;
         _instance = this;
     }

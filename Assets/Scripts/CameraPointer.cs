@@ -7,7 +7,7 @@ public class CameraPointer : MonoBehaviour
 
     public float sensitivity = 150f;
 
-    private const float _maxDistance = 50f;
+    private const float _maxDistance = 25f;
     private GameObject _gazedAtObject = null;
 
     private float horizontalRotation;
@@ -31,6 +31,7 @@ public class CameraPointer : MonoBehaviour
     public void Update()
     {
         // Fazer o objeto do player virar para a posição que ele está olhando
+        // Para que ele ande na direção que olha
         // playerBody.LookAt(transform.forward);
 
 #if UNITY_EDITOR

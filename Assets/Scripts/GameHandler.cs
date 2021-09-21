@@ -10,6 +10,7 @@ public class GameHandler : MonoBehaviour
 
     public GameObject PointSphere;
     public GameObject levelInfo;
+    public SoundAudioClip[] SoundAudioClips;
 
     private readonly Queue<Level> levels = new Queue<Level>();
 

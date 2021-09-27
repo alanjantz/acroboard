@@ -19,25 +19,38 @@ public class GameHandler : MonoBehaviour
     private int secondsInterval;
     private bool gameEnded;
 
-    private void Awake()
-    {
-        secondsInterval = 5;
-        _instance = this;
-    }
+    private bool reportFileCreated = false;
 
     public GameHandler()
     {
         levels = LevelGenerator.Genetare();
     }
 
+    private void Awake()
+    {
+        secondsInterval = 5;
+        _instance = this;
+        ReportManager.CreateReport(levels.Count);
+    }
+
     private void Update()
     {
         string currentLevel = "Total de pontos";
 
-        if (!gameEnded)
+        if (gameEnded)
+        {
+            if (!reportFileCreated)
+            {
+                FileManager.CreateReportFile(ReportManager.GetCurrentReport());
+                reportFileCreated = true;
+            }
+        }
+        else
         {
             if (pointSpheres.Count == 0)
             {
+                ReportManager.EndLevel(DateTime.Now);
+
                 if (_currentLevel == null)
                 {
                     if (levels.Count == 0)
@@ -51,6 +64,8 @@ public class GameHandler : MonoBehaviour
                         _currentLevel.SetStartTime(DateTime.Now.AddSeconds(secondsInterval));
 
                     _stage = _currentLevel.Stage;
+
+                    ReportManager.AddLevel(_currentLevel);
                 }
 
                 if (_currentLevel.StartTime.GetValueOrDefault() <= DateTime.Now)
@@ -66,15 +81,16 @@ public class GameHandler : MonoBehaviour
                 }
             }
 
-            currentLevel = $"Nível {_stage} ({pointSpheres.Count})";
+            currentLevel = $"Nível {_stage}";
         }
 
         levelInfo.SetTextMeshProValue(currentLevel, "Label");
-        levelInfo.SetTextMeshProValue(GameScore.GetInstance().CurrentScore.ToString());
+        levelInfo.SetTextMeshProValue(GameScoreHandler.GetInstance().CurrentScore.ToString());
     }
 
     public void RemovePoint(GameObject point)
     {
+        ReportManager.AddPoint();
         pointSpheres.Remove(point);
         Destroy(point);
     }

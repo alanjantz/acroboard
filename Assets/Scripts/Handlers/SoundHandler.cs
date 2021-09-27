@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundHandler : MonoBehaviour
 {
-    private static SoundManager _instance;
+    private static SoundHandler _instance;
 
-    public static SoundManager GetInstance() => _instance;
+    public static SoundHandler GetInstance() => _instance;
 
     public SoundAudioClip[] SoundAudioClips;
 

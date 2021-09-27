@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class GameScore : MonoBehaviour
+public class GameScoreHandler : MonoBehaviour
 {
-    public static GameScore _instance;
+    public static GameScoreHandler _instance;
 
-    public static GameScore GetInstance() => _instance;
+    public static GameScoreHandler GetInstance() => _instance;
 
     public float currentPointValue = 5f;
     public float CurrentScore { get; private set; } = 0f;
@@ -19,7 +19,7 @@ public class GameScore : MonoBehaviour
     public void AddPoints(int amount)
     {
         CurrentScore += currentPointValue * amount;
-        SoundManager.GetInstance().PlaySound(Sounds.Point);
+        SoundHandler.GetInstance().PlaySound(Sounds.Point);
     }
 
     public void IncreasePoints(float newPoints) => currentPointValue += newPoints;

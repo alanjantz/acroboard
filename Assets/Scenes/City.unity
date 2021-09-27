@@ -3587,7 +3587,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 234043744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309ab24f1d4a02c4d96ae24d6a799f8a, type: 3}
+  m_Script: {fileID: 11500000, guid: d302ce65020f8bb49a8676fccbe8d70c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PointSphere: {fileID: 9098581530758417050, guid: f952c45953efa004e81c1aaa34e7a386, type: 3}
@@ -8423,7 +8423,7 @@ GameObject:
   - component: {fileID: 445194096}
   - component: {fileID: 445194097}
   m_Layer: 0
-  m_Name: GameScore
+  m_Name: GameScoreHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8452,7 +8452,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 445194095}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da7fd8a2d7b47924080d7845c5e73bb5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1bc258ccf73ff8a43b0e36c0641b37fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentPointValue: 5
@@ -21390,7 +21390,7 @@ GameObject:
   - component: {fileID: 1112957078}
   - component: {fileID: 1112957079}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: SoundHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21515,7 +21515,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1112957076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85238f2a0324bb34799311c2aaf8d2a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 06a37d18b1f61454599efc38a950bc71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SoundAudioClips:

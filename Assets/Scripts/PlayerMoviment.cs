@@ -23,36 +23,36 @@ public class PlayerMoviment : MonoBehaviour
         initialPosition = platform.transform.position.y;
     }
 
-    void OnHorizontalMovement(InputValue input)
+    private void OnHorizontalMovement(InputValue input)
     {
         var value = input.Get<float>();
 
         horizontalRotation = value;
     }
 
-    void OnVerticalMovement(InputValue input)
+    private void OnVerticalMovement(InputValue input)
     {
         var value = input.Get<float>();
 
         verticalRotation = value;
     }
 
-    void OnGoUp(InputValue input)
+    private void OnGoUp()
     {
         state = GetNewState(PlayerMovimentState.GoingUp);
     }
 
-    void OnGoDown(InputValue input)
+    private void OnGoDown()
     {
         state = GetNewState(PlayerMovimentState.GoingDown);
     }
 
-    void OnReset(InputValue input)
+    private void OnReset()
     {
         state = GetNewState(PlayerMovimentState.Reseting);
     }
 
-    void OnGoToHighest(InputValue input)
+    private void OnGoToHighest()
     {
         state = GetNewState(PlayerMovimentState.GoingToHighest);
     }
@@ -88,7 +88,7 @@ public class PlayerMoviment : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         Vector3 move = transform.right * horizontalRotation + transform.forward * verticalRotation;
 
@@ -109,19 +109,6 @@ public class PlayerMoviment : MonoBehaviour
                 break;
         }
 
-        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue()}m";
-    }
-
-    private double GetHeightValue()
-    {
-        float divisor = 2.5f;
-        float equivalentMaxHeight = MaxHeight / divisor;
-
-        var result = platform.transform.position.y / divisor;
-
-        if (result >= equivalentMaxHeight - 0.5f)
-            return Math.Ceiling(equivalentMaxHeight);
-
-        return Math.Truncate(result);
+        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{platform.transform.position.y.GetHeightValue(maxHeight: MaxHeight)}m";
     }
 }

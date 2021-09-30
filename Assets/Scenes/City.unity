@@ -3645,6 +3645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 234043746}
   - component: {fileID: 234043745}
+  - component: {fileID: 234043747}
   m_Layer: 0
   m_Name: GameHandler
   m_TagString: Untagged
@@ -3682,6 +3683,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &234043747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234043744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: eab56ca2dd02d90469de1e08c74cb8da, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: a5a9fdbe-d43f-4069-9aa0-3d15dec1230d
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &240507873
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class Report
+public class GameReport
 {
     private ReportLevel _currentLevel;
 
@@ -14,7 +14,7 @@ public class Report
     [JsonIgnore]
     public bool HasCurrentLevel => _currentLevel != null;
 
-    public Report(int expectedStages)
+    public GameReport(int expectedStages)
     {
         Timestamp = DateTime.Now;
         ExpectedStages = expectedStages;

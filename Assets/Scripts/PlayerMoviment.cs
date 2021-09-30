@@ -10,6 +10,8 @@ public class PlayerMoviment : MonoBehaviour
     public GameObject platform;
     public GameObject heightInfo;
 
+    public static double CurrentPlatformHeight { get; protected set; }
+
     private float horizontalRotation;
     private float verticalRotation;
 
@@ -109,6 +111,9 @@ public class PlayerMoviment : MonoBehaviour
                 break;
         }
 
-        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{platform.transform.position.y.GetHeightValue(maxHeight: MaxHeight)}m";
+        var currentHeight = platform.transform.position.y.GetHeightValue(maxHeight: MaxHeight);
+
+        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{currentHeight}m";
+        CurrentPlatformHeight = currentHeight;
     }
 }

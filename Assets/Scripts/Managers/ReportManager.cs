@@ -1,29 +1,34 @@
 ﻿using System;
 
-public class ReportManager
+public static class ReportManager
 {
-    private static Report _currentReport;
+    private static GameReport _currentGameReport;
 
-    public static Report GetCurrentReport() => _currentReport;
+    public static GameReport GetCurrentGameReport() => _currentGameReport;
 
-    public static void CreateReport(int expectedStages)
+    public static void CreateGameReport(int expectedStages)
     {
-        _currentReport = new Report(expectedStages);
+        _currentGameReport = new GameReport(expectedStages);
     }
 
     public static void AddLevel(Level level)
     {
-        _currentReport?.AddLevel(level.Stage, level.StartTime.GetValueOrDefault());
+        _currentGameReport?.AddLevel(level.Stage, level.StartTime.GetValueOrDefault());
     }
 
     public static void EndLevel(DateTime endTime)
     {
-        if (_currentReport?.HasCurrentLevel ?? false)
-            _currentReport.EndLevel(endTime);
+        if (_currentGameReport?.HasCurrentLevel ?? false)
+            _currentGameReport.EndLevel(endTime);
     }
 
     public static void AddPoint()
     {
-        _currentReport?.AddPoint(DateTime.Now);
+        _currentGameReport?.AddPoint(DateTime.Now);
+    }
+
+    public static void LogHeight(double height, DateTime gameStartDateTime)
+    {
+        FileManager.LogHeight(height, gameStartDateTime);
     }
 }

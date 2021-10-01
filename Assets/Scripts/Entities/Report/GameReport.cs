@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
-public class Report
+public class GameReport
 {
     private ReportLevel _currentLevel;
 
@@ -14,7 +14,7 @@ public class Report
     [JsonIgnore]
     public bool HasCurrentLevel => _currentLevel != null;
 
-    public Report(int expectedStages)
+    public GameReport(int expectedStages)
     {
         Timestamp = DateTime.Now;
         ExpectedStages = expectedStages;
@@ -33,8 +33,8 @@ public class Report
         _currentLevel.EndLevel(endTime);
     }
 
-    public void AddPoint(DateTime timestamp)
+    public void AddPoint(DateTime timestamp, double playerHeight, double pointHeight)
     {
-        _currentLevel.AddPoint(timestamp);
+        _currentLevel.AddPoint(timestamp, playerHeight, pointHeight);
     }
 }

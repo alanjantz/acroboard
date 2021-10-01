@@ -256,6 +256,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Actions",
+            "id": "a5a9fdbe-d43f-4069-9aa0-3d15dec1230d",
+            "actions": [
+                {
+                    "name": "GiveUp",
+                    "type": "Button",
+                    "id": "97832269-d6fd-470a-b19b-27229126f3a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "72c1d05b-51ab-4546-8312-fd78a2849c37",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GiveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

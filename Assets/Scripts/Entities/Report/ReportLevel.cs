@@ -19,8 +19,8 @@ public class ReportLevel
         EndTime = endTime;
     }
 
-    public void AddPoint(DateTime timestamp)
+    public void AddPoint(DateTime timestamp, double playerHeight, double pointHeight)
     {
-        Points.Add(new ReportLevelPoint(timestamp));
+        Points.Add(new ReportLevelPoint(timestamp, playerHeight, pointHeight));
     }
 }

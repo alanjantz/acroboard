@@ -16,10 +16,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-using System.Collections;
 using Google.XR.Cardboard;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.XR;
 using UnityEngine.XR.Management;
 
 /// <summary>

@@ -2,7 +2,7 @@
     "name": "PlayerController",
     "maps": [
         {
-            "name": "Rotation",
+            "name": "Movement",
             "id": "e7b90d05-e3e3-4af4-b4a4-47aa7f798c1f",
             "actions": [
                 {
@@ -17,6 +17,22 @@
                     "name": "VerticalRotation",
                     "type": "Value",
                     "id": "e233fc9c-fc27-425a-9925-9f571c49f001",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HorizontalMovement",
+                    "type": "Value",
+                    "id": "78260bae-2774-4aca-abd2-baf9df829ea4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "VerticalMovement",
+                    "type": "Value",
+                    "id": "2668621b-e161-4c85-9f70-c826bb2ad3dd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -88,66 +104,10 @@
                     "action": "VerticalRotation",
                     "isComposite": false,
                     "isPartOfComposite": true
-                }
-            ]
-        },
-        {
-            "name": "Movement",
-            "id": "7b7bb409-ab77-48bd-8ebc-7535e0f93ae3",
-            "actions": [
-                {
-                    "name": "HorizontalMovement",
-                    "type": "Value",
-                    "id": "3827a710-c0f3-4557-8203-d89e7663fa75",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 },
-                {
-                    "name": "VerticalMovement",
-                    "type": "Value",
-                    "id": "2415fc9c-ee78-410a-b139-7c43da3a6ab9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "GoUp",
-                    "type": "Value",
-                    "id": "f1eb8fd8-7f83-4e93-8865-e3e1933d4049",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "GoDown",
-                    "type": "Value",
-                    "id": "cd96708c-1ff3-4deb-b8a9-aa3d32ebe82c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Reset",
-                    "type": "Button",
-                    "id": "e20eb951-6408-4768-88ca-e4b4e83bd6c7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "GoToHighest",
-                    "type": "Button",
-                    "id": "7077e026-1793-4f91-9de2-fa340241e1b3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
                 {
                     "name": "Left Stick",
-                    "id": "84696a97-d829-4ca3-86d5-4111be02a95b",
+                    "id": "b9990b34-920d-4f03-be85-5aff42262a37",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -158,7 +118,7 @@
                 },
                 {
                     "name": "negative",
-                    "id": "93dadc11-b175-46ae-8eec-e4fddf207112",
+                    "id": "28040ff8-01c6-41ac-8635-880b97146dd1",
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
@@ -169,7 +129,7 @@
                 },
                 {
                     "name": "positive",
-                    "id": "32464caf-ea7b-432a-b0be-9e1b84d9c957",
+                    "id": "47bfeb0c-cb8b-4974-9757-47567b4644e4",
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
@@ -180,7 +140,7 @@
                 },
                 {
                     "name": "Left Stick",
-                    "id": "b70d6f80-067c-49d2-9307-3abda26b44fc",
+                    "id": "235c0f32-0710-4cbf-8092-08eec6acb6cb",
                     "path": "1DAxis",
                     "interactions": "",
                     "processors": "",
@@ -191,7 +151,7 @@
                 },
                 {
                     "name": "negative",
-                    "id": "7b34c3e1-df01-4a51-ba56-a2d0f8fb26b3",
+                    "id": "105db383-4449-440a-af0e-8f4100da81c7",
                     "path": "<Gamepad>/leftStick/down",
                     "interactions": "",
                     "processors": "",
@@ -202,7 +162,7 @@
                 },
                 {
                     "name": "positive",
-                    "id": "78e9db8d-39ba-4e89-aa2c-94f372d27ef9",
+                    "id": "77085a51-ce7c-4c8a-8bb8-341ccfe26877",
                     "path": "<Gamepad>/leftStick/up",
                     "interactions": "",
                     "processors": "",
@@ -210,55 +170,11 @@
                     "action": "VerticalMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "41ecef14-9aca-45ec-bd6b-76e841fe8b3e",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GoUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c10a3dcf-0438-4757-8649-214cf0b8301e",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GoDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d703ec98-c3a4-4908-88d3-deb43fb35bb6",
-                    "path": "<Gamepad>/rightShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reset",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7e9060b6-c7db-48a3-8853-3b3bdbdcc804",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "GoToHighest",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "Actions",
+            "name": "GameActions",
             "id": "a5a9fdbe-d43f-4069-9aa0-3d15dec1230d",
             "actions": [
                 {
@@ -279,6 +195,109 @@
                     "processors": "",
                     "groups": "",
                     "action": "GiveUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Platform",
+            "id": "2180bf66-dda8-405b-ae61-2a87cdec7d44",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "a009dbaa-2368-4513-9385-b85a8b7cf9d7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoUp",
+                    "type": "Value",
+                    "id": "c7f60bb4-0602-4b39-9a5f-ad96af6e0310",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoDown",
+                    "type": "Value",
+                    "id": "7b8b2384-a02e-4f12-b551-d7925e3d2c73",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Reset",
+                    "type": "Button",
+                    "id": "b54ae261-b169-474f-99a0-670d25db469e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoToHighest",
+                    "type": "Button",
+                    "id": "96abb974-c6ea-4c86-a176-ff57ef15e032",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a3f119c8-bee2-423f-906e-9481256c35c0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cf7f399-6525-41b9-aa76-f9dc4afb1660",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoUp",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a0b31916-6328-40f0-8503-45d8c86de60f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7550d8e3-ac6b-4ca8-8098-25d3c18b959b",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reset",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05f8c61c-32d7-4b19-8985-62f01f6e1256",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GoToHighest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -6,6 +6,7 @@ public class GameHandler : MonoBehaviour
 {
     public GameObject PointSphere;
     public GameObject levelInfo;
+    public float Speed = 12f;
 
     private static GameHandler _instance;
     public static GameHandler GetInstance() => _instance;
@@ -46,6 +47,7 @@ public class GameHandler : MonoBehaviour
                 Destroy(point);
 
             ReportManager.EndLevel(DateTime.Now);
+            Platform.GetInstance().StopPlatform();
         }
     }
 
@@ -107,7 +109,7 @@ public class GameHandler : MonoBehaviour
 
     public void RemovePoint(GameObject point)
     {
-        ReportManager.AddPoint(PlayerMoviment.CurrentPlatformHeight, point.transform.position.y.GetHeightValue());
+        ReportManager.AddPoint(Platform.CurrentPlatformHeight, point.transform.position.y.GetHeightValue());
         pointSpheres.Remove(point);
         Destroy(point);
     }

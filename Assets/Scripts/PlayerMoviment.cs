@@ -19,6 +19,7 @@ public class PlayerMoviment : MonoBehaviour
 
     private float initialPosition = 0f;
     public static float MaxHeight = 80;
+    private const float divisor = 2.5f;
 
     private void Awake()
     {
@@ -111,9 +112,19 @@ public class PlayerMoviment : MonoBehaviour
                 break;
         }
 
-        var currentHeight = platform.transform.position.y.GetHeightValue(maxHeight: MaxHeight);
+        var currentHeight = platform.transform.position.y.GetHeightValue();
 
-        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{currentHeight}m";
+        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(currentHeight)}m";
         CurrentPlatformHeight = currentHeight;
+    }
+
+    public double GetHeightValue(double height)
+    {
+        float equivalentMaxHeight = MaxHeight / divisor;
+
+        if (height >= equivalentMaxHeight - 0.5f)
+            return Math.Ceiling(equivalentMaxHeight);
+
+        return Math.Truncate(height);
     }
 }

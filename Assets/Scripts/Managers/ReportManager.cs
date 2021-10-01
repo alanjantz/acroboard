@@ -22,9 +22,9 @@ public static class ReportManager
             _currentGameReport.EndLevel(endTime);
     }
 
-    public static void AddPoint()
+    public static void AddPoint(double playerHeight, double pointHeight)
     {
-        _currentGameReport?.AddPoint(DateTime.Now);
+        _currentGameReport?.AddPoint(DateTime.Now, playerHeight, pointHeight);
     }
 
     public static void LogHeight(double height, DateTime gameStartDateTime)

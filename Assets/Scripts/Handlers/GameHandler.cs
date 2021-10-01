@@ -21,6 +21,8 @@ public class GameHandler : MonoBehaviour
     private bool gameEnded;
     private bool reportFileCreated = false;
 
+    private const string defaultCurrentLevelMessage = "Total de pontos";
+
     public GameHandler()
     {
         levels = LevelGenerator.Genetare();
@@ -49,7 +51,7 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        string currentLevel = "Total de pontos";
+        string currentLevel = defaultCurrentLevelMessage;
 
         if (gameEnded)
         {
@@ -105,7 +107,7 @@ public class GameHandler : MonoBehaviour
 
     public void RemovePoint(GameObject point)
     {
-        ReportManager.AddPoint();
+        ReportManager.AddPoint(PlayerMoviment.CurrentPlatformHeight, point.transform.position.y.GetHeightValue());
         pointSpheres.Remove(point);
         Destroy(point);
     }

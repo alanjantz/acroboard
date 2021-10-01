@@ -33,8 +33,8 @@ public class GameReport
         _currentLevel.EndLevel(endTime);
     }
 
-    public void AddPoint(DateTime timestamp)
+    public void AddPoint(DateTime timestamp, double playerHeight, double pointHeight)
     {
-        _currentLevel.AddPoint(timestamp);
+        _currentLevel.AddPoint(timestamp, playerHeight, pointHeight);
     }
 }

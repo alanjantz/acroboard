@@ -9,7 +9,7 @@ public class ReportHandler : MonoBehaviour
 
     void SaveCurrentHeight()
     {
-        ReportManager.LogHeight(PlayerMoviment.CurrentPlatformHeight, GameHandler.GameStartDateTime);
+        ReportManager.LogHeight(Platform.CurrentPlatformHeight, GameHandler.GameStartDateTime);
     }
 
     void OnApplicationQuit()

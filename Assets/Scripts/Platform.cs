@@ -1,19 +1,16 @@
 using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class PlayerMoviment : MonoBehaviour
+public class Platform : MonoBehaviour
 {
-    public CharacterController controller;
-    public float speed = 12f;
-    public GameObject platform;
+    private static Platform _instance;
+    public static Platform GetInstance() => _instance;
+
     public GameObject heightInfo;
 
-    public static double CurrentPlatformHeight { get; protected set; }
-
-    private float horizontalRotation;
-    private float verticalRotation;
+    public static float CurrentPlatformY { get; protected set; }
+    public static double CurrentPlatformHeight => CurrentPlatformY.GetHeightValue();
 
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
 
@@ -23,21 +20,12 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Awake()
     {
-        initialPosition = platform.transform.position.y;
+        initialPosition = transform.position.y;
     }
 
-    private void OnHorizontalMovement(InputValue input)
+    private void Start()
     {
-        var value = input.Get<float>();
-
-        horizontalRotation = value;
-    }
-
-    private void OnVerticalMovement(InputValue input)
-    {
-        var value = input.Get<float>();
-
-        verticalRotation = value;
+        _instance = this;
     }
 
     private void OnGoUp()
@@ -75,28 +63,18 @@ public class PlayerMoviment : MonoBehaviour
 
     private void Move(int aux, float limit, Func<float, float, bool> comparison)
     {
-        var platformPosition = aux * speed * Time.deltaTime * platform.transform.up;
+        var platformPosition = aux * GameHandler.GetInstance().Speed * Time.deltaTime * transform.up;
 
-        var nextHeight = platformPosition.y + platform.transform.position.y;
+        var nextHeight = platformPosition.y + transform.position.y;
 
         if (comparison(limit, nextHeight))
-        {
-            platform.transform.position += platformPosition;
-
-            controller.Move(aux * speed * Time.deltaTime * transform.up);
-        }
+            transform.position += platformPosition;
         else
-        {
             state = PlayerMovimentState.StandingBy;
-        }
     }
 
     private void Update()
     {
-        Vector3 move = transform.right * horizontalRotation + transform.forward * verticalRotation;
-
-        controller.Move(speed * Time.deltaTime * move);
-
         switch (state)
         {
             case PlayerMovimentState.GoingUp:
@@ -112,10 +90,8 @@ public class PlayerMoviment : MonoBehaviour
                 break;
         }
 
-        var currentHeight = platform.transform.position.y.GetHeightValue();
-
-        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(currentHeight)}m";
-        CurrentPlatformHeight = currentHeight;
+        CurrentPlatformY = transform.position.y;
+        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(CurrentPlatformY.GetHeightValue())}m";
     }
 
     public double GetHeightValue(double height)
@@ -126,5 +102,10 @@ public class PlayerMoviment : MonoBehaviour
             return Math.Ceiling(equivalentMaxHeight);
 
         return Math.Truncate(height);
+    }
+
+    public void StopPlatform()
+    {
+        state = PlayerMovimentState.StandingBy;
     }
 }

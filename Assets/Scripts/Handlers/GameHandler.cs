@@ -37,20 +37,6 @@ public class GameHandler : MonoBehaviour
         ReportManager.CreateGameReport(levels.Count);
     }
 
-    private void OnGiveUp()
-    {
-        if (!gameEnded)
-        {
-            gameEnded = true;
-
-            foreach (var point in pointSpheres)
-                Destroy(point);
-
-            ReportManager.EndLevel(DateTime.Now);
-            Platform.GetInstance().StopPlatform();
-        }
-    }
-
     private void Update()
     {
         string currentLevel = defaultCurrentLevelMessage;
@@ -68,6 +54,20 @@ public class GameHandler : MonoBehaviour
 
         levelInfo.SetTextMeshProValue(currentLevel, "Label");
         levelInfo.SetTextMeshProValue(GameScoreHandler.GetInstance().CurrentScore.ToString());
+    }
+
+    private void OnGiveUp()
+    {
+        if (!gameEnded)
+        {
+            gameEnded = true;
+
+            foreach (var point in pointSpheres)
+                Destroy(point);
+
+            ReportManager.EndLevel(DateTime.Now);
+            Platform.GetInstance().StopPlatform();
+        }
     }
 
     private void ControlLevels()

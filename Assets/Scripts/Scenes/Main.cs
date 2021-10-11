@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class Main : MonoBehaviour
+public class Main : BaseVrScene
 {
     public void StartGame()
     {

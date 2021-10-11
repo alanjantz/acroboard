@@ -1,6 +1,4 @@
-using UnityEngine;
-
-public class Loader : MonoBehaviour
+public class Loader : BaseVrScene
 {
     private void Update()
     {

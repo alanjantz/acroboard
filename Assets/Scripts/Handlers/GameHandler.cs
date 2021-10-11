@@ -11,6 +11,8 @@ public class GameHandler : MonoBehaviour
     private static GameHandler _instance;
     public static GameHandler GetInstance() => _instance;
 
+    public static bool IsPaused { get; protected set; }
+
     public static DateTime GameStartDateTime { get; protected set; }
 
     private readonly Queue<Level> levels = new Queue<Level>();
@@ -34,6 +36,7 @@ public class GameHandler : MonoBehaviour
     {
         secondsInterval = 5;
         _instance = this;
+        IsPaused = false;
         ReportManager.CreateGameReport(levels.Count);
     }
 
@@ -70,9 +73,19 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private void OnPause()
+    {
+        IsPaused = true;
+    }
+
+    private void OnResume()
+    {
+        Resume();
+    }
+
     private void ControlLevels()
     {
-        if (pointSpheres.Count == 0)
+        if (!IsPaused && pointSpheres.Count == 0)
         {
             ReportManager.EndLevel(DateTime.Now);
 
@@ -121,5 +134,20 @@ public class GameHandler : MonoBehaviour
             FileManager.CreateGameReportFile(ReportManager.GetCurrentGameReport(), GameStartDateTime);
             reportFileCreated = true;
         }
+    }
+
+    public void Resume()
+    {
+        IsPaused = false;
+    }
+
+    public void ShowControls()
+    {
+
+    }
+
+    public void ReturnToMainScreen()
+    {
+        LoaderManager.Load(GameScene.Main);
     }
 }

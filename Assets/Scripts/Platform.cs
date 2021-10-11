@@ -84,23 +84,26 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
-        switch (state)
+        if (!GameHandler.IsPaused)
         {
-            case PlayerMovimentState.GoingUp:
-            case PlayerMovimentState.GoingToHighest:
-                GoUp(MaxHeight);
-                break;
-            case PlayerMovimentState.GoingDown:
-            case PlayerMovimentState.Reseting:
-                GoDown(initialPosition);
-                break;
-            case PlayerMovimentState.StandingBy:
-            default:
-                break;
-        }
+            switch (state)
+            {
+                case PlayerMovimentState.GoingUp:
+                case PlayerMovimentState.GoingToHighest:
+                    GoUp(MaxHeight);
+                    break;
+                case PlayerMovimentState.GoingDown:
+                case PlayerMovimentState.Reseting:
+                    GoDown(initialPosition);
+                    break;
+                case PlayerMovimentState.StandingBy:
+                default:
+                    break;
+            }
 
-        CurrentPlatformY = transform.position.y;
-        heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(CurrentPlatformY.GetHeightValue())}m";
+            CurrentPlatformY = transform.position.y;
+            heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(CurrentPlatformY.GetHeightValue())}m";
+        }
     }
 
     public double GetHeightValue(double height)

@@ -24,7 +24,7 @@ public class Blinker : MonoBehaviour
     private void Blink()
     {
         _timeChecker += Time.deltaTime;
-        float alpha = 1f;
+        float alpha = 0;
 
         if (_timeChecker < FadeInTime)
             alpha = _timeChecker / FadeInTime;

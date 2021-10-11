@@ -23,23 +23,15 @@ public class CityUIManager : MonoBehaviour
 
     private void ControlMenu(bool isPaused)
     {
-        float alpha = 0f;
-        var originalColor = _background.color;
-
         Menu.SetActive(isPaused);
         if (isPaused)
         {
-            alpha = 0.75f;
             if (EventSystem.current.currentSelectedGameObject == null)
-            {
                 EventSystem.current.SetSelectedGameObject(resumeButton);
-            }
         }
         else
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
-
-        _background.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
     }
 }

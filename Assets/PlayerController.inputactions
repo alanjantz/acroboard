@@ -205,18 +205,10 @@
             "id": "2180bf66-dda8-405b-ae61-2a87cdec7d44",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "a009dbaa-2368-4513-9385-b85a8b7cf9d7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "GoUp",
                     "type": "Value",
                     "id": "c7f60bb4-0602-4b39-9a5f-ad96af6e0310",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -224,7 +216,7 @@
                     "name": "GoDown",
                     "type": "Value",
                     "id": "7b8b2384-a02e-4f12-b551-d7925e3d2c73",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -248,20 +240,9 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "a3f119c8-bee2-423f-906e-9481256c35c0",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5cf7f399-6525-41b9-aa76-f9dc4afb1660",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "GoUp",
@@ -271,8 +252,8 @@
                 {
                     "name": "",
                     "id": "a0b31916-6328-40f0-8503-45d8c86de60f",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "GoDown",

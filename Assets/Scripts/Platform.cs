@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Platform : MonoBehaviour
 {
@@ -28,14 +29,22 @@ public class Platform : MonoBehaviour
         _instance = this;
     }
 
-    private void OnGoUp()
+    private void OnGoUp(InputValue inputValue)
     {
-        state = GetNewState(PlayerMovimentState.GoingUp);
+        ControlTriggerAction(PlayerMovimentState.GoingUp, inputValue.Get<float>());
     }
 
-    private void OnGoDown()
+    private void OnGoDown(InputValue inputValue)
     {
-        state = GetNewState(PlayerMovimentState.GoingDown);
+        ControlTriggerAction(PlayerMovimentState.GoingDown, inputValue.Get<float>());
+    }
+
+    private void ControlTriggerAction(PlayerMovimentState newState, float value)
+    {
+        if (value > 0)
+            state = GetNewState(newState);
+        else
+            state = PlayerMovimentState.StandingBy;
     }
 
     private void OnReset()

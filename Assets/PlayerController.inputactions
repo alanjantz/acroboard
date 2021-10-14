@@ -259,17 +259,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Reset",
+                    "name": "GoToHighest",
                     "type": "Button",
-                    "id": "b54ae261-b169-474f-99a0-670d25db469e",
+                    "id": "96abb974-c6ea-4c86-a176-ff57ef15e032",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "GoToHighest",
+                    "name": "Reset",
                     "type": "Button",
-                    "id": "96abb974-c6ea-4c86-a176-ff57ef15e032",
+                    "id": "b54ae261-b169-474f-99a0-670d25db469e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -301,7 +301,7 @@
                 {
                     "name": "",
                     "id": "7550d8e3-ac6b-4ca8-8098-25d3c18b959b",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -312,7 +312,7 @@
                 {
                     "name": "",
                     "id": "05f8c61c-32d7-4b19-8985-62f01f6e1256",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

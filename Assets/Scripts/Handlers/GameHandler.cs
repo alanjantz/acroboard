@@ -61,16 +61,7 @@ public class GameHandler : MonoBehaviour
 
     private void OnGiveUp()
     {
-        if (!gameEnded)
-        {
-            gameEnded = true;
-
-            foreach (var point in pointSpheres)
-                Destroy(point);
-
-            ReportManager.EndLevel(DateTime.Now);
-            Platform.GetInstance().StopPlatform();
-        }
+        EndGame();
     }
 
     private void OnPause()
@@ -127,6 +118,20 @@ public class GameHandler : MonoBehaviour
         Destroy(point);
     }
 
+    public void EndGame()
+    {
+        if (!gameEnded)
+        {
+            gameEnded = true;
+
+            foreach (var point in pointSpheres)
+                Destroy(point);
+
+            ReportManager.EndLevel(DateTime.Now);
+            Platform.GetInstance().StopPlatform();
+        }
+    }
+
     public void SaveGameReport()
     {
         if (!reportFileCreated)
@@ -143,11 +148,12 @@ public class GameHandler : MonoBehaviour
 
     public void ShowControls()
     {
-
+        CityUIManager.GetInstance().ShowControllers();
     }
 
     public void ReturnToMainScreen()
     {
+        EndGame();
         LoaderManager.Load(GameScene.Main);
     }
 }

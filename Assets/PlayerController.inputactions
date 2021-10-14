@@ -184,6 +184,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "787029eb-a012-474c-8df9-880e29d52195",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Resume",
+                    "type": "Button",
+                    "id": "86bb4632-8cbd-468f-a006-3d4382e1fa29",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -197,6 +213,28 @@
                     "action": "GiveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ca1464b1-59dc-45fc-b28c-05273a0be824",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ce1f937-e3ca-4746-8e70-c53ecd01c11f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Resume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -205,18 +243,10 @@
             "id": "2180bf66-dda8-405b-ae61-2a87cdec7d44",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "a009dbaa-2368-4513-9385-b85a8b7cf9d7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
                     "name": "GoUp",
                     "type": "Value",
                     "id": "c7f60bb4-0602-4b39-9a5f-ad96af6e0310",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
                 },
@@ -224,6 +254,14 @@
                     "name": "GoDown",
                     "type": "Value",
                     "id": "7b8b2384-a02e-4f12-b551-d7925e3d2c73",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "GoToHighest",
+                    "type": "Button",
+                    "id": "96abb974-c6ea-4c86-a176-ff57ef15e032",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -235,33 +273,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "GoToHighest",
-                    "type": "Button",
-                    "id": "96abb974-c6ea-4c86-a176-ff57ef15e032",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
                 {
                     "name": "",
-                    "id": "a3f119c8-bee2-423f-906e-9481256c35c0",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5cf7f399-6525-41b9-aa76-f9dc4afb1660",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "GoUp",
@@ -271,8 +290,8 @@
                 {
                     "name": "",
                     "id": "a0b31916-6328-40f0-8503-45d8c86de60f",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "GoDown",
@@ -282,7 +301,7 @@
                 {
                     "name": "",
                     "id": "7550d8e3-ac6b-4ca8-8098-25d3c18b959b",
-                    "path": "<Gamepad>/rightShoulder",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -293,7 +312,7 @@
                 {
                     "name": "",
                     "id": "05f8c61c-32d7-4b19-8985-62f01f6e1256",
-                    "path": "<Gamepad>/leftShoulder",
+                    "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

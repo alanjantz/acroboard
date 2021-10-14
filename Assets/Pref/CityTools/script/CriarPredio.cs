@@ -1,54 +1,59 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class CriarPredio : MonoBehaviour {
+public class CriarPredio : MonoBehaviour
+{
 
-	public GameObject terrio;
-	public GameObject andar;
-	public GameObject cobertura;
+    public GameObject terrio;
+    public GameObject andar;
+    public GameObject cobertura;
 
-	public Transform centro;
+    public Transform centro;
 
-	public float alturaAndar = 4f;
+    public float alturaAndar = 4f;
 
-	public int andarQuantMax = 10;
-	public int andarQuantMin = 3;
-	int andarQuant = 4;
+    public int andarQuantMax = 10;
+    public int andarQuantMin = 3;
+    int andarQuant = 4;
 
     public GameObject building;
 
     // Use this for initialization
-    void Start () {
-		//criarPredio ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start()
+    {
+        //criarPredio ();
+    }
 
-	public void criarPredio(){
-        building = Instantiate(gameObject,this.transform.position, Quaternion.identity);
-        building.name = "building_"+Time.time;
-        andarQuant = Random.Range (andarQuantMin,andarQuantMax);
-	
-		criarAndar(terrio, this.transform.position);
-		Vector3 pos = this.transform.position;
-		//criarAndar(andar,this.transform.position);
-        for (int i = 0; i < andarQuant - 1; i++ ){
-			pos.y += alturaAndar;
-			criarAndar(andar,pos);
-		}
+    // Update is called once per frame
+    void Update()
+    {
 
-		pos.y += alturaAndar;
-		criarAndar(cobertura,pos);
+    }
 
-	}
+    public void criarPredio()
+    {
+        building = Instantiate(gameObject, this.transform.position, Quaternion.identity);
+        building.name = "building_" + Time.time;
+        andarQuant = Random.Range(andarQuantMin, andarQuantMax);
 
-	public void criarAndar(GameObject obj, Vector3 pos){
+        criarAndar(terrio, this.transform.position);
+        Vector3 pos = this.transform.position;
+        //criarAndar(andar,this.transform.position);
+        for (int i = 0; i < andarQuant - 1; i++)
+        {
+            pos.y += alturaAndar;
+            criarAndar(andar, pos);
+        }
 
-		GameObject a = Instantiate (obj, pos, Quaternion.identity) as GameObject;
-		a.transform.parent = building.transform;
+        pos.y += alturaAndar;
+        criarAndar(cobertura, pos);
 
-	}
+    }
+
+    public void criarAndar(GameObject obj, Vector3 pos)
+    {
+
+        GameObject a = Instantiate(obj, pos, Quaternion.identity) as GameObject;
+        a.transform.parent = building.transform;
+
+    }
 }

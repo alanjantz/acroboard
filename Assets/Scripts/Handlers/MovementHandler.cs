@@ -50,10 +50,13 @@ public class MovementHandler : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if (!GameHandler.IsPaused)
+        {
+            Move();
 #if UNITY_EDITOR
-        Rotate();
+            Rotate();
 #endif
+        }
     }
 
     private void Move()

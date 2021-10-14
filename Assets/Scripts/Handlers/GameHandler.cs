@@ -11,6 +11,8 @@ public class GameHandler : MonoBehaviour
     private static GameHandler _instance;
     public static GameHandler GetInstance() => _instance;
 
+    public static bool IsPaused { get; protected set; }
+
     public static DateTime GameStartDateTime { get; protected set; }
 
     private readonly Queue<Level> levels = new Queue<Level>();
@@ -34,21 +36,8 @@ public class GameHandler : MonoBehaviour
     {
         secondsInterval = 5;
         _instance = this;
+        IsPaused = false;
         ReportManager.CreateGameReport(levels.Count);
-    }
-
-    private void OnGiveUp()
-    {
-        if (!gameEnded)
-        {
-            gameEnded = true;
-
-            foreach (var point in pointSpheres)
-                Destroy(point);
-
-            ReportManager.EndLevel(DateTime.Now);
-            Platform.GetInstance().StopPlatform();
-        }
     }
 
     private void Update()
@@ -70,9 +59,24 @@ public class GameHandler : MonoBehaviour
         levelInfo.SetTextMeshProValue(GameScoreHandler.GetInstance().CurrentScore.ToString());
     }
 
+    private void OnGiveUp()
+    {
+        EndGame();
+    }
+
+    private void OnPause()
+    {
+        IsPaused = true;
+    }
+
+    private void OnResume()
+    {
+        Resume();
+    }
+
     private void ControlLevels()
     {
-        if (pointSpheres.Count == 0)
+        if (!IsPaused && pointSpheres.Count == 0)
         {
             ReportManager.EndLevel(DateTime.Now);
 
@@ -114,6 +118,20 @@ public class GameHandler : MonoBehaviour
         Destroy(point);
     }
 
+    public void EndGame()
+    {
+        if (!gameEnded)
+        {
+            gameEnded = true;
+
+            foreach (var point in pointSpheres)
+                Destroy(point);
+
+            ReportManager.EndLevel(DateTime.Now);
+            Platform.GetInstance().StopPlatform();
+        }
+    }
+
     public void SaveGameReport()
     {
         if (!reportFileCreated)
@@ -121,5 +139,21 @@ public class GameHandler : MonoBehaviour
             FileManager.CreateGameReportFile(ReportManager.GetCurrentGameReport(), GameStartDateTime);
             reportFileCreated = true;
         }
+    }
+
+    public void Resume()
+    {
+        IsPaused = false;
+    }
+
+    public void ShowControls()
+    {
+        CityUIManager.GetInstance().ShowControllers();
+    }
+
+    public void ReturnToMainScreen()
+    {
+        EndGame();
+        LoaderManager.Load(GameScene.Main);
     }
 }

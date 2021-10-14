@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraPointer : MonoBehaviour
 {
@@ -10,19 +9,22 @@ public class CameraPointer : MonoBehaviour
 
     public void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
+        if (!GameHandler.IsPaused)
         {
-            if (_gazedAtObject != hit.transform.gameObject)
+            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
             {
-                _gazedAtObject = hit.transform.gameObject;
+                if (_gazedAtObject != hit.transform.gameObject)
+                {
+                    _gazedAtObject = hit.transform.gameObject;
 
-                if (_gazedAtObject.CompareTag(Constants.PointSphereTag))
-                    _gazedAtObject.SendMessage("OnLook");
+                    if (_gazedAtObject.CompareTag(Constants.PointSphereTag))
+                        _gazedAtObject.SendMessage("OnLook");
+                }
             }
-        }
-        else
-        {
-            _gazedAtObject = null;
+            else
+            {
+                _gazedAtObject = null;
+            }
         }
     }
 }

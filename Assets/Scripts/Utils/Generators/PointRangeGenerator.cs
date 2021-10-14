@@ -11,8 +11,6 @@ public static class PointRangeGenerator
         new PointRange(-10, 40, -15, 15),
     };
 
-    private static readonly System.Random Randomizer = new System.Random();
-
     public static List<LevelPointRange> Generate(int pointsAmount, float heightMin, float heightMax)
     {
         var result = new List<LevelPointRange>();
@@ -20,11 +18,11 @@ public static class PointRangeGenerator
 
         for (int i = 0; i < pointsAmount; i++)
         {
-            var index = Randomizer.Next(0, PointsRange.Count);
+            var index = Random.Range(0, PointsRange.Count);
 
             if (usedRanges.Count < 4)
                 while (usedRanges.Contains(index))
-                    index = Randomizer.Next(0, PointsRange.Count);
+                    index = Random.Range(0, PointsRange.Count);
             else
                 usedRanges.Clear();
             usedRanges.Add(index);

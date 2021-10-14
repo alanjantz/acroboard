@@ -22,8 +22,10 @@ public class CityUIManager : MonoBehaviour
 
     void Update()
     {
-        ControlMenu(GameHandler.IsPaused);
-        Pointer.SetActive(!GameHandler.IsPaused);
+        var playing = GameManager.Playing;
+
+        ControlMenu(!playing);
+        Pointer.SetActive(playing);
     }
 
     private void ControlMenu(bool isPaused)

@@ -6,13 +6,15 @@ using UnityEngine;
 
 public static class FileManager
 {
-    public static void CreateGameReportFile(GameReport report, DateTime gameStartDateTime)
+    public static string CreateGameReportFile(GameReport report, DateTime gameStartDateTime)
     {
         string path = $"{GetFolderPath(gameStartDateTime)}/game-report.json";
         string content = JsonConvert.SerializeObject(report, Formatting.Indented);
 
         if (!File.Exists(path))
             File.WriteAllText(path, content);
+
+        return path;
     }
 
     public static void LogHeight(double height, DateTime gameStartDateTime)

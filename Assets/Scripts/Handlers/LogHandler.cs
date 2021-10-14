@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class ReportHandler : MonoBehaviour
+public class LogHandler : MonoBehaviour
 {
     void Start()
     {
@@ -9,7 +9,7 @@ public class ReportHandler : MonoBehaviour
 
     void SaveCurrentHeight()
     {
-        ReportManager.LogHeight(Platform.CurrentPlatformHeight, GameHandler.GameStartDateTime);
+        ReportManager.LogHeight(Platform.CurrentPlatformHeight, GameHandler.GameStartTime);
     }
 
     void OnApplicationQuit()

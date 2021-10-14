@@ -5,19 +5,18 @@ using UnityEngine.InputSystem;
 
 public class Platform : MonoBehaviour
 {
-    private static Platform _instance;
-    public static Platform GetInstance() => _instance;
-
     public GameObject heightInfo;
+    public float Speed = 12f;
 
+    public static float MaxHeight = 80;
     public static float CurrentPlatformY { get; protected set; }
     public static double CurrentPlatformHeight => CurrentPlatformY.GetHeightValue();
-
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
-
     private float initialPosition = 0f;
-    public static float MaxHeight = 80;
     private const float divisor = 2.5f;
+
+    private static Platform _instance;
+    public static Platform GetInstance() => _instance;
 
     private void Awake()
     {
@@ -72,7 +71,7 @@ public class Platform : MonoBehaviour
 
     private void Move(int aux, float limit, Func<float, float, bool> comparison)
     {
-        var platformPosition = aux * GameHandler.GetInstance().Speed * Time.deltaTime * transform.up;
+        var platformPosition = aux * Speed * Time.deltaTime * transform.up;
 
         var nextHeight = platformPosition.y + transform.position.y;
 
@@ -84,7 +83,7 @@ public class Platform : MonoBehaviour
 
     private void Update()
     {
-        if (!GameHandler.IsPaused)
+        if (GameManager.Playing)
         {
             switch (state)
             {

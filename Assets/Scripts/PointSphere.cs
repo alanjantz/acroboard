@@ -11,7 +11,7 @@ public class PointSphere : MonoBehaviour
 
     public void OnLook()
     {
-        GameScoreHandler.GetInstance().AddPoint();
+        GameManager.AddPoint();
         _gameHandler.RemovePoint(this.transform.parent.gameObject);
     }
 }

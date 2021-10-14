@@ -9,7 +9,7 @@ public class CameraPointer : MonoBehaviour
 
     public void Update()
     {
-        if (!GameHandler.IsPaused)
+        if (GameManager.Playing)
         {
             if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
             {

@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MovementHandler : MonoBehaviour
 {
+    public float Speed = 12f;
     private float sensitivity = 150f;
 
     private float xRotation;
@@ -50,7 +51,7 @@ public class MovementHandler : MonoBehaviour
 
     void Update()
     {
-        if (!GameHandler.IsPaused)
+        if (GameManager.Playing)
         {
             Move();
 #if UNITY_EDITOR
@@ -62,7 +63,7 @@ public class MovementHandler : MonoBehaviour
     private void Move()
     {
         var direction = new Vector3(horizontalMovement, 0, verticalMovement);
-        var velocity = direction * GameHandler.GetInstance().Speed;
+        var velocity = direction * Speed;
 
         velocity = Camera.main.transform.TransformDirection(velocity);
         controller.Move(velocity * Time.deltaTime);

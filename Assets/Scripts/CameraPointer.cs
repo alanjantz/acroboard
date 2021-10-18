@@ -9,22 +9,27 @@ public class CameraPointer : MonoBehaviour
 
     public void Update()
     {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
+        {
+            if (_gazedAtObject != hit.transform.gameObject)
+            {
+                _gazedAtObject = hit.transform.gameObject;
+
+                ControlGameActions(_gazedAtObject);
+            }
+        }
+        else
+        {
+            _gazedAtObject = null;
+        }
+    }
+
+    private void ControlGameActions(GameObject gazedAtObject)
+    {
         if (GameManager.Playing)
         {
-            if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, _maxDistance))
-            {
-                if (_gazedAtObject != hit.transform.gameObject)
-                {
-                    _gazedAtObject = hit.transform.gameObject;
-
-                    if (_gazedAtObject.CompareTag(Constants.PointSphereTag))
-                        _gazedAtObject.SendMessage("OnLook");
-                }
-            }
-            else
-            {
-                _gazedAtObject = null;
-            }
+            if (gazedAtObject.CompareTag(Constants.PointSphereTag))
+                gazedAtObject.SendMessage("OnLook");
         }
     }
 }

@@ -2,5 +2,6 @@
 {
     Default = 1,
     Options,
-    Controllers
+    Controllers,
+    NoControllerConnected
 }

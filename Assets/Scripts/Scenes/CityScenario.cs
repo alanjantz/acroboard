@@ -1,6 +1,9 @@
 ﻿public class CityScenario : BaseVrScene
 {
-    private void Start()
+    public override void OnUpdate()
     {
+        base.OnUpdate();
+
+        GameHandler.GetInstance().HasController = HasController;
     }
 }

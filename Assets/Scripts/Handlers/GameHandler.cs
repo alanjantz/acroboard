@@ -11,6 +11,7 @@ public class GameHandler : MonoBehaviour
     private int _expectedSpheres { get; set; }
     private int _secondsInterval = 5;
     private Level _currentLevel { get; set; }
+    private bool _userPaused { get; set; }
     private Game CurrentGame => GameManager.CurrentGame;
     private int CurrentStage => GameManager.CurrentLevel?.Stage ?? 0;
     private const string defaultCurrentLevelMessage = "Total de pontos";
@@ -19,6 +20,7 @@ public class GameHandler : MonoBehaviour
     private static GameHandler _instance;
     public static GameHandler GetInstance() => _instance;
     public static DateTime GameStartTime { get; private set; }
+    public bool HasController { get; set; }
 
     private void Start()
     {
@@ -30,24 +32,38 @@ public class GameHandler : MonoBehaviour
 
     private void Update()
     {
-        string currentLevel = defaultCurrentLevelMessage;
-
-        if (GameManager.Active)
+        if (HasController)
         {
-            ControlLevels();
+            if (!_userPaused && CurrentGame.Paused)
+                Resume();
 
-            if (_pointSpheres.Count == 0)
-                currentLevel = loadingMessage;
+            string currentLevel = defaultCurrentLevelMessage;
+
+            if (GameManager.Active)
+            {
+                ControlLevels();
+
+                if (_pointSpheres.Count == 0)
+                    currentLevel = loadingMessage;
+                else
+                    currentLevel = $"Nível {CurrentStage} ({_expectedSpheres - _pointSpheres.Count}/{_expectedSpheres})";
+            }
             else
-                currentLevel = $"Nível {CurrentStage} ({_expectedSpheres - _pointSpheres.Count}/{_expectedSpheres})";
+            {
+                SaveGameReport();
+            }
+
+            LevelInfo.SetTextMeshProValue(currentLevel, "Label");
+            LevelInfo.SetTextMeshProValue(CurrentGame.Score.ToString());
         }
         else
         {
-            SaveGameReport();
-        }
+            _userPaused = false;
+            if (!CurrentGame.Paused)
+                Pause();
 
-        LevelInfo.SetTextMeshProValue(currentLevel, "Label");
-        LevelInfo.SetTextMeshProValue(CurrentGame.Score.ToString());
+            ShowNoControllerConnected();
+        }
     }
 
     private void OnGiveUp()
@@ -57,11 +73,13 @@ public class GameHandler : MonoBehaviour
 
     private void OnPause()
     {
-        CurrentGame.Pause();
+        _userPaused = true;
+        Pause();
     }
 
     private void OnResume()
     {
+        _userPaused = false;
         Resume();
     }
 
@@ -130,6 +148,11 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    private void Pause()
+    {
+        CurrentGame.Pause();
+    }
+
     public void Resume()
     {
         CurrentGame.Resume();
@@ -137,7 +160,12 @@ public class GameHandler : MonoBehaviour
 
     public void ShowControls()
     {
-        CityUIManager.GetInstance().ShowControllers();
+        CityUIManager.GetInstance().Show(CityUIMenuStates.Controllers);
+    }
+
+    private void ShowNoControllerConnected()
+    {
+        CityUIManager.GetInstance().Show(CityUIMenuStates.NoControllerConnected);
     }
 
     public void ReturnToMainScreen()

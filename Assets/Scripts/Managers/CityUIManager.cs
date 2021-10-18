@@ -7,6 +7,7 @@ public class CityUIManager : MonoBehaviour
     public GameObject Menu;
     public GameObject MenuOptions;
     public GameObject MenuControllers;
+    public GameObject MenuNoControllerConnected;
 
     public GameObject ResumeButton, ControllersButton, ExitButton;
     private CityUIMenuStates _state;
@@ -32,42 +33,32 @@ public class CityUIManager : MonoBehaviour
     {
         Menu.SetActive(isPaused);
 
+        if (_state == CityUIMenuStates.Default)
+            _state = CityUIMenuStates.Options;
+
         if (isPaused)
         {
-            if (_state == CityUIMenuStates.Default)
-                _state = CityUIMenuStates.Options;
+            bool isOptionsMenu = _state == CityUIMenuStates.Options;
 
-            switch (_state)
-            {
-                case CityUIMenuStates.Controllers:
-                    ShowControllers();
-                    break;
-                case CityUIMenuStates.Options:
-                default:
-                    ShowOptions();
-                    break;
-            }
+            if (isOptionsMenu && EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(ResumeButton);
+
+            MenuOptions.SetActive(isOptionsMenu);
+            MenuControllers.SetActive(_state == CityUIMenuStates.Controllers);
+            MenuNoControllerConnected.SetActive(_state == CityUIMenuStates.NoControllerConnected);
         }
         else
         {
             _state = CityUIMenuStates.Default;
+            MenuOptions.SetActive(false);
+            MenuControllers.SetActive(false);
+            MenuNoControllerConnected.SetActive(false);
             EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
-    public void ShowOptions()
+    public void Show(CityUIMenuStates menu)
     {
-        _state = CityUIMenuStates.Options;
-        MenuOptions.SetActive(true);
-        MenuControllers.SetActive(false);
-        if (EventSystem.current.currentSelectedGameObject == null)
-            EventSystem.current.SetSelectedGameObject(ResumeButton);
-    }
-
-    public void ShowControllers()
-    {
-        _state = CityUIMenuStates.Controllers;
-        MenuOptions.SetActive(false);
-        MenuControllers.SetActive(true);
+        _state = menu;
     }
 }

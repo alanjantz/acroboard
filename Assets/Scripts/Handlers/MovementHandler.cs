@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class MovementHandler : MonoBehaviour
 {
-    public float Speed = 12f;
-    private float sensitivity = 150f;
+    private float _sensitivity = 150f;
 
     private float xRotation;
     private float horizontalRotation;
@@ -63,7 +62,7 @@ public class MovementHandler : MonoBehaviour
     private void Move()
     {
         var direction = new Vector3(horizontalMovement, 0, verticalMovement);
-        var velocity = direction * Speed;
+        var velocity = direction * AcroboardConfiguration.PlayerVelocity;
 
         velocity = Camera.main.transform.TransformDirection(velocity);
         controller.Move(velocity * Time.deltaTime);
@@ -72,8 +71,8 @@ public class MovementHandler : MonoBehaviour
 
     private void Rotate()
     {
-        float xAxis = horizontalRotation * sensitivity * Time.deltaTime;
-        float yAxis = verticalRotation * sensitivity * Time.deltaTime;
+        float xAxis = horizontalRotation * _sensitivity * Time.deltaTime;
+        float yAxis = verticalRotation * _sensitivity * Time.deltaTime;
 
         xRotation -= yAxis;
 

@@ -37,24 +37,7 @@ public class GameHandler : MonoBehaviour
             if (!_userPaused && CurrentGame.Paused)
                 Resume();
 
-            string currentLevel = defaultCurrentLevelMessage;
-
-            if (GameManager.Active)
-            {
-                ControlLevels();
-
-                if (_pointSpheres.Count == 0)
-                    currentLevel = loadingMessage;
-                else
-                    currentLevel = $"Nível {CurrentStage} ({_expectedSpheres - _pointSpheres.Count}/{_expectedSpheres})";
-            }
-            else
-            {
-                SaveGameReport();
-            }
-
-            LevelInfo.SetTextMeshProValue(currentLevel, "Label");
-            LevelInfo.SetTextMeshProValue(CurrentGame.Score.ToString());
+            ControlGame();
         }
         else
         {
@@ -81,6 +64,35 @@ public class GameHandler : MonoBehaviour
     {
         _userPaused = false;
         Resume();
+    }
+
+    private void ControlGame()
+    {
+        if (!AcroboardConfiguration.SpectatorMode)
+        {
+            string currentLevel = defaultCurrentLevelMessage;
+
+            if (GameManager.Active)
+            {
+                ControlLevels();
+
+                if (_pointSpheres.Count == 0)
+                    currentLevel = loadingMessage;
+                else
+                    currentLevel = $"Nível {CurrentStage} ({_expectedSpheres - _pointSpheres.Count}/{_expectedSpheres})";
+            }
+            else
+            {
+                SaveGameReport();
+            }
+
+            LevelInfo.SetTextMeshProValue(currentLevel, "Label");
+            LevelInfo.SetTextMeshProValue(CurrentGame.Score.ToString());
+        }
+        else
+        {
+            LevelInfo.SetActive(false);
+        }
     }
 
     private void ControlLevels()

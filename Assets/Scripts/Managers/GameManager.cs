@@ -12,7 +12,7 @@ public static class GameManager
     public static void CreateNewGame(DateTime start)
     {
         Reset();
-        CurrentGame = new Game(start, LevelGenerator.Genetare(1));
+        CurrentGame = new Game(start, LevelGenerator.Genetare(AcroboardConfiguration.LevelsAmount));
         Active = true;
     }
 

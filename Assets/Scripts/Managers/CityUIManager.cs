@@ -38,14 +38,11 @@ public class CityUIManager : MonoBehaviour
 
         if (isPaused)
         {
-            bool isOptionsMenu = _state == CityUIMenuStates.Options;
-
-            if (isOptionsMenu && EventSystem.current.currentSelectedGameObject == null)
-                EventSystem.current.SetSelectedGameObject(ResumeButton);
-
-            MenuOptions.SetActive(isOptionsMenu);
+            MenuOptions.SetActive(_state == CityUIMenuStates.Options);
             MenuControllers.SetActive(_state == CityUIMenuStates.Controllers);
             MenuNoControllerConnected.SetActive(_state == CityUIMenuStates.NoControllerConnected);
+            if (EventSystem.current.currentSelectedGameObject == null)
+                EventSystem.current.SetSelectedGameObject(ResumeButton);
         }
         else
         {

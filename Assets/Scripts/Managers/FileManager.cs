@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using UnityEngine;
 
 public static class FileManager
 {
@@ -30,7 +29,7 @@ public static class FileManager
 
     private static string GetFolderPath(DateTime dateTime)
     {
-        var folderPath = $"{Application.persistentDataPath}/{GetFolderName(dateTime)}";
+        var folderPath = $"{AcroboardConfiguration.FilesPath}/{GetFolderName(dateTime)}";
 
         CreateFolder(folderPath);
 

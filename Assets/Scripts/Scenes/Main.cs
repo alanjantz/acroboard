@@ -10,6 +10,11 @@ public class Main : BaseVrScene
         LoaderManager.Load(GameScene.City);
     }
 
+    public void ShowConfigurations()
+    {
+        LoaderManager.Load(GameScene.Configurations, true);
+    }
+
     public override void OnUpdate()
     {
         SelectInfo.SetActive(HasController);

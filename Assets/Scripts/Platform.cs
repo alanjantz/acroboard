@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Platform : MonoBehaviour
 {
     public GameObject heightInfo;
-    public float Speed = 12f;
 
     public static float MaxHeight = 80;
     public static float CurrentPlatformY { get; protected set; }
@@ -71,7 +70,7 @@ public class Platform : MonoBehaviour
 
     private void Move(int aux, float limit, Func<float, float, bool> comparison)
     {
-        var platformPosition = aux * Speed * Time.deltaTime * transform.up;
+        var platformPosition = aux * AcroboardConfiguration.PlatformVelocity * Time.deltaTime * transform.up;
 
         var nextHeight = platformPosition.y + transform.position.y;
 

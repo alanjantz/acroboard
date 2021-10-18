@@ -16,9 +16,12 @@ public static class LevelGenerator
 
     private static readonly List<LevelPointRange> defaultPointRanges = PointRangeGenerator.Generate(5, 1, Platform.MaxHeight);
 
-    public static Queue<Level> Genetare(int amount = 8)
+    public static Queue<Level> Genetare(int? amount = null)
     {
         var result = new Queue<Level>();
+
+        if (amount is null)
+            amount = AcroboardConfiguration.LevelsAmount;
 
         for (int stage = 0; stage < amount; stage++)
         {

@@ -27,8 +27,8 @@ public static class ReportManager
         _currentGameReport?.AddPoint(DateTime.Now, playerHeight, pointHeight);
     }
 
-    public static void LogHeight(double height, DateTime gameStartDateTime)
+    public static void LogStatus(DateTime gameStartDateTime, double height, PlayerLookingDirection playerLookingDirection)
     {
-        FileManager.LogHeight(height, gameStartDateTime);
+        FileManager.LogPlayerStatus(gameStartDateTime, height, playerLookingDirection);
     }
 }

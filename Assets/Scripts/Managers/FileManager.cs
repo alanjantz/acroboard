@@ -16,10 +16,12 @@ public static class FileManager
         return path;
     }
 
-    public static void LogHeight(double height, DateTime gameStartDateTime)
+    public static void LogPlayerStatus(DateTime timestamp, double height, PlayerLookingDirection playerLookingDirection)
     {
-        string path = $"{GetFolderPath(gameStartDateTime)}/height-log.json";
-        string content = $"{DateTime.Now} - {height:0.##}m{Environment.NewLine}";
+        string path = $"{GetFolderPath(timestamp)}/player-status.json";
+        var status = new PlayerStatusReport(timestamp, height, playerLookingDirection);
+
+        string content = $"{JsonConvert.SerializeObject(status)}{Environment.NewLine}";
 
         if (!File.Exists(path))
             File.WriteAllText(path, content);

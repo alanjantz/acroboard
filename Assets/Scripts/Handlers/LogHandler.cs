@@ -4,12 +4,14 @@ public class LogHandler : MonoBehaviour
 {
     void Start()
     {
-        InvokeRepeating("SaveCurrentHeight", 1f, 1f);
+        InvokeRepeating("SaveCurrentStatus", 1f, 1f);
     }
 
-    void SaveCurrentHeight()
+    void SaveCurrentStatus()
     {
-        ReportManager.LogHeight(Platform.CurrentPlatformHeight, GameHandler.GameStartTime);
+        ReportManager.LogStatus(GameHandler.GameStartTime,
+                                Platform.CurrentPlatformHeight,
+                                PlayerStatusReport.GetPlayerLookingDirection(Camera.main.transform.rotation.eulerAngles.x));
     }
 
     void OnApplicationQuit()

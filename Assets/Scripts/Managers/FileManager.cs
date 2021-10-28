@@ -1,14 +1,14 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
 using System.Text.RegularExpressions;
+using UnityEngine;
 
 public static class FileManager
 {
-    public static string CreateGameReportFile(GameReport report, DateTime gameStartDateTime)
+    public static string CreateGameReportFile(GameReport report, DateTime timestamp)
     {
-        string path = $"{GetFolderPath(gameStartDateTime)}/game-report.json";
-        string content = JsonConvert.SerializeObject(report, Formatting.Indented);
+        string path = $"{GetFolderPath(timestamp)}/game-report.json";
+        string content = JsonUtility.ToJson(report, true);
 
         if (!File.Exists(path))
             File.WriteAllText(path, content);
@@ -18,10 +18,10 @@ public static class FileManager
 
     public static void LogPlayerStatus(DateTime timestamp, double height, PlayerLookingDirection playerLookingDirection)
     {
-        string path = $"{GetFolderPath(timestamp)}/player-status.json";
+        string path = $"{GetFolderPath(timestamp)}/player-status.log";
         var status = new PlayerStatusReport(timestamp, height, playerLookingDirection);
 
-        string content = $"{JsonConvert.SerializeObject(status)}{Environment.NewLine}";
+        string content = $"{JsonUtility.ToJson(status)}{Environment.NewLine}";
 
         if (!File.Exists(path))
             File.WriteAllText(path, content);

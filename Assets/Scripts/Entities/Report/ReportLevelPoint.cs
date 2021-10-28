@@ -1,14 +1,15 @@
 ﻿using System;
 
+[Serializable]
 public class ReportLevelPoint
 {
-    public DateTime Timestamp { get; protected set; }
-    public double PlayerHeight { get; protected set; }
-    public double PointHeight { get; protected set; }
+    public string Timestamp;
+    public double PlayerHeight;
+    public double PointHeight;
 
     public ReportLevelPoint(DateTime timestamp, double playerHeight, double pointHeight)
     {
-        Timestamp = timestamp;
+        Timestamp = timestamp.ToFullString();
         PlayerHeight = playerHeight;
         PointHeight = pointHeight;
     }

@@ -3,13 +3,13 @@
 [Serializable]
 public class PlayerStatusReport
 {
-    public DateTime Timestamp { get; protected set; }
-    public double Height { get; protected set; }
-    public PlayerLookingDirection LookingDirection { get; protected set; }
+    public string Timestamp;
+    public double Height;
+    public PlayerLookingDirection LookingDirection;
 
     public PlayerStatusReport(DateTime timestamp, double height, PlayerLookingDirection playerLookingDirection)
     {
-        Timestamp = timestamp;
+        Timestamp = timestamp.ToFullString();
         Height = height;
         LookingDirection = playerLookingDirection;
     }

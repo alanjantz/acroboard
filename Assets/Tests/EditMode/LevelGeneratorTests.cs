@@ -1,25 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
-using UnityEngine;
-using UnityEngine.TestTools;
 
 public class LevelGeneratorTests
 {
-    // A Test behaves as an ordinary method
     [Test]
-    public void LevelGeneratorTestsSimplePasses()
+    [TestCase(1)]
+    [TestCase(2)]
+    [TestCase(3)]
+    [TestCase(4)]
+    [TestCase(5)]
+    [TestCase(6)]
+    [TestCase(7)]
+    [TestCase(8)]
+    public void LevelGenerator_Generate_ShouldGenerateExpectedAmount(int levelsAmount)
     {
-        // Use the Assert class to test conditions
+        var generatedLevels = LevelGenerator.Genetare(levelsAmount);
+
+        Assert.That(generatedLevels.Count, Is.EqualTo(levelsAmount));
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
-    [UnityTest]
-    public IEnumerator LevelGeneratorTestsWithEnumeratorPasses()
+    [Test]
+    public void LevelGenerator_Generate_ShouldGenerateExpectedPointsAmount()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        var expectedResult = new int[]
+        {
+            3, 4, 5, 5, 6, 6, 7, 8
+        };
+
+        var generatedLevels = LevelGenerator.Genetare(8);
+
+        for (int i = 0; i < generatedLevels.Count; i++)
+        {
+            Assert.That(generatedLevels.Dequeue().Positions.Count, Is.EqualTo(expectedResult[i]));
+        }
     }
 }

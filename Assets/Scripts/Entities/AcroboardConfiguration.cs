@@ -10,6 +10,7 @@ public static class AcroboardConfiguration
     private const string PLAYER_VIEW_MAX_DISTANCE = "PLAYER_VIEW_MAX_DISTANCE";
     private const string LEVELS_AMOUNT = "LEVELS_AMOUNT";
     private const string SPECTATOR = "SPECTATOR";
+    private const string TUTORIAL = "TUTORIAL";
 
     public static string FilesPath
     {
@@ -83,6 +84,18 @@ public static class AcroboardConfiguration
         }
     }
 
+    public static bool Tutorial
+    {
+        get
+        {
+            return PlayerPrefs.GetInt(TUTORIAL) == TRUE;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(TUTORIAL, value ? TRUE : FALSE);
+        }
+    }
+
     public static void Reset()
     {
         PlayerPrefs.SetString(FILE_PATH, DefaultValues.FilePath);
@@ -90,6 +103,7 @@ public static class AcroboardConfiguration
         PlayerPrefs.SetFloat(PLATFORM_VELOCITY, DefaultValues.PlatformVelocity);
         PlayerPrefs.SetFloat(PLAYER_VIEW_MAX_DISTANCE, DefaultValues.PlayerViewMaxDistance);
         PlayerPrefs.SetInt(SPECTATOR, FALSE);
+        PlayerPrefs.SetInt(TUTORIAL, TRUE);
     }
 
     private static string GetStringValue(string key, string defaultValue)

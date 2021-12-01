@@ -34,7 +34,7 @@ public class GameHandler : MonoBehaviour
     {
         if (HasController)
         {
-            if (!_userPaused && CurrentGame.Paused)
+            if (!_userPaused && GameManager.Paused && (!AcroboardConfiguration.Tutorial || (AcroboardConfiguration.Tutorial && CityUIManager.GetInstance().ShowedTutorial)))
                 Resume();
 
             ControlGame();
@@ -42,7 +42,7 @@ public class GameHandler : MonoBehaviour
         else
         {
             _userPaused = false;
-            if (!CurrentGame.Paused)
+            if (GameManager.Playing)
                 Pause();
 
             ShowNoControllerConnected();
@@ -72,7 +72,7 @@ public class GameHandler : MonoBehaviour
         {
             string currentLevel = defaultCurrentLevelMessage;
 
-            if (GameManager.Active)
+            if (GameManager.Playing)
             {
                 ControlLevels();
 
@@ -97,17 +97,14 @@ public class GameHandler : MonoBehaviour
 
     private void ControlLevels()
     {
-        if (!CurrentGame.Paused && _pointSpheres.Count == 0)
+        if (GameManager.Playing && _pointSpheres.Count == 0)
         {
             ReportManager.EndLevel(DateTime.Now);
 
             if (_currentLevel == null)
             {
                 if (CurrentGame.Levels.Count == 0)
-                {
-                    GameManager.EndCurrentGame();
                     return;
-                }
 
                 _currentLevel = CurrentGame.NextLevel();
                 if (!_currentLevel.StartTime.HasValue)
@@ -140,10 +137,8 @@ public class GameHandler : MonoBehaviour
 
     public void EndGame()
     {
-        if (GameManager.Active)
+        if (GameManager.Playing)
         {
-            GameManager.EndCurrentGame();
-
             foreach (var point in _pointSpheres)
                 Destroy(point);
 
@@ -162,12 +157,13 @@ public class GameHandler : MonoBehaviour
 
     private void Pause()
     {
-        CurrentGame.Pause();
+        GameManager.Pause();
     }
 
     public void Resume()
     {
-        CurrentGame.Resume();
+        CityUIManager.GetInstance().HideTutorial();
+        GameManager.Resume();
     }
 
     public void ShowControls()

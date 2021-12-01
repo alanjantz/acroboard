@@ -5,9 +5,12 @@ using UnityEngine.InputSystem;
 
 public class Platform : MonoBehaviour
 {
-    public GameObject heightInfo;
+    private const float DEFAULT_MAX_HEIGHT = 80f;
 
-    public static float MaxHeight = 80;
+    public GameObject heightInfo;
+    public float maxHeight = DEFAULT_MAX_HEIGHT;
+
+    public static float CurrentMaxHeight = DEFAULT_MAX_HEIGHT;
     public static float CurrentPlatformY { get; protected set; }
     public static double CurrentPlatformHeight => CurrentPlatformY.GetHeightValue();
     private PlayerMovimentState state = PlayerMovimentState.StandingBy;
@@ -24,6 +27,7 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
+        CurrentMaxHeight = maxHeight;
         _instance = this;
     }
 
@@ -88,7 +92,7 @@ public class Platform : MonoBehaviour
             {
                 case PlayerMovimentState.GoingUp:
                 case PlayerMovimentState.GoingToHighest:
-                    GoUp(MaxHeight);
+                    GoUp(CurrentMaxHeight);
                     break;
                 case PlayerMovimentState.GoingDown:
                 case PlayerMovimentState.Reseting:
@@ -100,13 +104,15 @@ public class Platform : MonoBehaviour
             }
 
             CurrentPlatformY = transform.position.y;
-            heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(CurrentPlatformY.GetHeightValue())}m";
+
+            if (heightInfo != null)
+                heightInfo.gameObject.transform.Find("Value").GetComponent<TextMeshPro>().text = $"{GetHeightValue(CurrentPlatformY.GetHeightValue())}m";
         }
     }
 
     public double GetHeightValue(double height)
     {
-        float equivalentMaxHeight = MaxHeight / divisor;
+        float equivalentMaxHeight = CurrentMaxHeight / divisor;
 
         if (height >= equivalentMaxHeight - 0.5f)
             return Math.Ceiling(equivalentMaxHeight);

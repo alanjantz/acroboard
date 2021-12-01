@@ -4,13 +4,12 @@ using UnityEngine.EventSystems;
 public class CityUIManager : MonoBehaviour
 {
     public GameObject Pointer;
-    public GameObject Menu;
-    public GameObject MenuOptions;
-    public GameObject MenuControllers;
-    public GameObject MenuNoControllerConnected;
 
+    public GameObject Menu, Tutorial, MenuOptions, MenuControllers, MenuNoControllerConnected;
     public GameObject ResumeButton, ControllersButton, ExitButton;
+
     private CityUIMenuStates _state;
+    public bool ShowedTutorial = false;
 
     private static CityUIManager _instance;
     public static CityUIManager GetInstance() => _instance;
@@ -23,21 +22,26 @@ public class CityUIManager : MonoBehaviour
 
     void Update()
     {
-        var playing = GameManager.Playing;
+        if (AcroboardConfiguration.Tutorial && !ShowedTutorial)
+        {
+            _state = CityUIMenuStates.Tutorial;
+            GameManager.Pause();
+        }
 
-        ControlMenu(!playing);
-        Pointer.SetActive(playing);
+        ControlMenu();
+        Pointer.SetActive(GameManager.Playing);
     }
 
-    private void ControlMenu(bool isPaused)
+    private void ControlMenu()
     {
-        Menu.SetActive(isPaused);
+        Menu.SetActive(GameManager.Paused);
 
         if (_state == CityUIMenuStates.Default)
             _state = CityUIMenuStates.Options;
 
-        if (isPaused)
+        if (GameManager.Paused)
         {
+            Tutorial.SetActive(_state == CityUIMenuStates.Tutorial);
             MenuOptions.SetActive(_state == CityUIMenuStates.Options);
             MenuControllers.SetActive(_state == CityUIMenuStates.Controllers);
             MenuNoControllerConnected.SetActive(_state == CityUIMenuStates.NoControllerConnected);
@@ -47,6 +51,7 @@ public class CityUIManager : MonoBehaviour
         else
         {
             _state = CityUIMenuStates.Default;
+            Tutorial.SetActive(false);
             MenuOptions.SetActive(false);
             MenuControllers.SetActive(false);
             MenuNoControllerConnected.SetActive(false);
@@ -57,5 +62,10 @@ public class CityUIManager : MonoBehaviour
     public void Show(CityUIMenuStates menu)
     {
         _state = menu;
+    }
+
+    public void HideTutorial()
+    {
+        ShowedTutorial = true;
     }
 }

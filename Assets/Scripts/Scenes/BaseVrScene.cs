@@ -9,6 +9,7 @@ public class BaseVrScene : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Screen.brightness = 1.0f;
+        HasController = Gamepad.all.Count > 0;
 
         OnStart();
     }

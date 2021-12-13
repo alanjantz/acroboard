@@ -7,6 +7,7 @@ public static class GameManager
     public static Level CurrentLevel => CurrentGame?.CurrentLevel;
     public static bool Paused { get; private set; }
     public static bool Playing => !Paused;
+    public static bool GameEnded { get; private set; }
 
     private static float _currentPointValue = 5f;
 
@@ -18,6 +19,11 @@ public static class GameManager
 
     public static void Pause() => Paused = true;
     public static void Resume()=> Paused = false;
+    public static void EndGame()
+    {
+        Pause();
+        GameEnded = true;
+    }
 
     public static void AddPoint() => AddPoints(1);
     public static void AddPoints(int amount) => CurrentGame.AddPoints(amount, _currentPointValue);

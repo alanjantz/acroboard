@@ -29,7 +29,8 @@ public static class PointRangeGenerator
 
             var range = PointsRange[index];
 
-            result.Add(new LevelPointRange(new Vector3(range.Min.x, heightMin, range.Min.y), new Vector3(range.Max.x, heightMax, range.Max.y)));
+            result.Add(new LevelPointRange(new Vector3(range.Min.x, heightMin, range.Min.y), 
+                                           new Vector3(range.Max.x, heightMax, range.Max.y)));
         }
 
         return result;

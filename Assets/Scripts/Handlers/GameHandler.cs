@@ -81,9 +81,9 @@ public class GameHandler : MonoBehaviour
                 else
                     currentLevel = $"Nível {CurrentStage} ({_expectedSpheres - _pointSpheres.Count}/{_expectedSpheres})";
             }
-            else
+            else if (GameManager.GameEnded)
             {
-                SaveGameReport();
+                EndGame();
             }
 
             LevelInfo.SetTextMeshProValue(currentLevel, "Label");
@@ -104,7 +104,10 @@ public class GameHandler : MonoBehaviour
             if (_currentLevel == null)
             {
                 if (CurrentGame.Levels.Count == 0)
+                {
+                    GameManager.EndGame();
                     return;
+                }
 
                 _currentLevel = CurrentGame.NextLevel();
                 if (!_currentLevel.StartTime.HasValue)
@@ -137,22 +140,21 @@ public class GameHandler : MonoBehaviour
 
     public void EndGame()
     {
-        if (GameManager.Playing)
-        {
-            foreach (var point in _pointSpheres)
-                Destroy(point);
+        GameManager.EndGame();
 
-            ReportManager.EndLevel(DateTime.Now);
-            Platform.GetInstance().StopPlatform();
-        }
+        foreach (var point in _pointSpheres)
+            Destroy(point);
+
+        ReportManager.EndLevel(DateTime.Now);
+        Platform.GetInstance().StopPlatform();
+
+        SaveGameReport();
     }
 
     public void SaveGameReport()
     {
-        if (!CurrentGame.ReportCreated)
-        {
+        if (GameManager.GameEnded)
             GameManager.CreateGameReportFile();
-        }
     }
 
     private void Pause()

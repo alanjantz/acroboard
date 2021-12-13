@@ -6,13 +6,15 @@ public class CameraPointer : MonoBehaviour
 
     public void Update()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, AcroboardConfiguration.PlayerViewMaxDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit,
+                            AcroboardConfiguration.PlayerViewMaxDistance))
         {
             if (_gazedObject != hit.transform.gameObject)
             {
                 _gazedObject = hit.transform.gameObject;
 
-                ControlGameActions(_gazedObject);
+                if (_gazedObject.CompareTag(Constants.PointSphereTag))
+                    _gazedObject.SendMessage("OnLook");
             }
         }
         else
@@ -20,13 +22,5 @@ public class CameraPointer : MonoBehaviour
             _gazedObject = null;
         }
     }
-
-    private void ControlGameActions(GameObject gazedObject)
-    {
-        if (GameManager.Playing)
-        {
-            if (gazedObject.CompareTag(Constants.PointSphereTag))
-                gazedObject.SendMessage("OnLook");
-        }
-    }
 }
+

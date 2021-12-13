@@ -13,7 +13,7 @@ public class PlayerStatusReportTests
         var result = PlayerStatusReport.GetPlayerLookingDirection(cameraDirection);
 
         // Assert
-        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Straight));
+        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Forward));
     }
 
     [Test]
@@ -26,7 +26,7 @@ public class PlayerStatusReportTests
         var result = PlayerStatusReport.GetPlayerLookingDirection(cameraDirection);
 
         // Assert
-        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Down));
+        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Downward));
     }
 
     [Test]
@@ -39,6 +39,6 @@ public class PlayerStatusReportTests
         var result = PlayerStatusReport.GetPlayerLookingDirection(cameraDirection);
 
         // Assert
-        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Up));
+        Assert.That(result, Is.EqualTo(PlayerLookingDirection.Upward));
     }
 }

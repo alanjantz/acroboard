@@ -23,7 +23,7 @@ public static class FileManager
         string path = $"{GetFolderPath(timestamp)}/player-status.csv";
         var status = new PlayerStatusReport(timestamp, height, playerLookingDirection);
 
-        string content = $"{status.Timestamp};{status.Height};{(int)status.LookingDirection};{status.LookingDirection.GetStringValue()}";
+        string content = $"{DateTime.Now:s};{status.Height};{(int)status.LookingDirection};{status.LookingDirection.GetStringValue()}";
 
         if (!File.Exists(path))
             File.WriteAllText(path, PLAYER_STATUS_HEADER + Environment.NewLine);

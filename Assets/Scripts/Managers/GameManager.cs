@@ -1,11 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 public static class GameManager
 {
     public static Game CurrentGame { get; private set; }
     public static Level CurrentLevel => CurrentGame?.CurrentLevel;
-    public static bool Active { get; private set; }
-    public static bool Playing => !(CurrentGame?.Paused).GetValueOrDefault();
+    public static bool Paused { get; private set; }
+    public static bool Playing => !Paused;
+    public static bool GameEnded { get; private set; }
 
     private static float _currentPointValue = 5f;
 
@@ -13,13 +15,14 @@ public static class GameManager
     {
         Reset();
         CurrentGame = new Game(start, LevelGenerator.Genetare(AcroboardConfiguration.LevelsAmount));
-        Active = true;
     }
 
-    public static void EndCurrentGame()
+    public static void Pause() => Paused = true;
+    public static void Resume()=> Paused = false;
+    public static void EndGame()
     {
-        if (Active)
-            Active = false;
+        Pause();
+        GameEnded = true;
     }
 
     public static void AddPoint() => AddPoints(1);

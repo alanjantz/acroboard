@@ -5,6 +5,8 @@ using UnityEngine;
 
 public static class FileManager
 {
+    private const string PLAYER_STATUS_HEADER = "Timestamp;Height;LookingDirection;LookingDirectionDescription";
+
     public static string CreateGameReportFile(GameReport report, DateTime timestamp)
     {
         string path = $"{GetFolderPath(timestamp)}/game-report.json";
@@ -18,15 +20,15 @@ public static class FileManager
 
     public static void LogPlayerStatus(DateTime timestamp, double height, PlayerLookingDirection playerLookingDirection)
     {
-        string path = $"{GetFolderPath(timestamp)}/player-status.log";
+        string path = $"{GetFolderPath(timestamp)}/player-status.csv";
         var status = new PlayerStatusReport(timestamp, height, playerLookingDirection);
 
-        string content = $"{JsonUtility.ToJson(status)}{Environment.NewLine}";
+        string content = $"{DateTime.Now:s};{status.Height};{(int)status.LookingDirection};{status.LookingDirection.GetStringValue()}";
 
         if (!File.Exists(path))
-            File.WriteAllText(path, content);
-        else
-            File.AppendAllText(path, content);
+            File.WriteAllText(path, PLAYER_STATUS_HEADER + Environment.NewLine);
+
+        File.AppendAllText(path, content + Environment.NewLine);
     }
 
     private static string GetFolderPath(DateTime dateTime)

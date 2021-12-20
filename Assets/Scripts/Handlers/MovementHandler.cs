@@ -53,7 +53,7 @@ public class MovementHandler : MonoBehaviour
         if (GameManager.Playing)
         {
             Move();
-#if UNITY_EDITOR
+#if (!UNITY_IPHONE && !UNITY_ANDROID && !UNITY_IOS)
             Rotate();
 #endif
         }

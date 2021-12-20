@@ -8,6 +8,10 @@ public class Configuration : BaseVrScene
     public TextMeshProUGUI PlayerVelocity;
     public TextMeshProUGUI PlatformVelocity;
     public TextMeshProUGUI SpectatorButton;
+    public TextMeshProUGUI TutorialOnStartButton;
+
+    private const string ON = "on";
+    private const string OFF = "off";
 
     void Start()
     {
@@ -18,6 +22,12 @@ public class Configuration : BaseVrScene
     {
         AcroboardConfiguration.SpectatorMode = !AcroboardConfiguration.SpectatorMode;
         ChangeSpectatorModeText(AcroboardConfiguration.SpectatorMode);
+    }
+
+    public void ChangeTutorialOnStartMode()
+    {
+        AcroboardConfiguration.Tutorial = !AcroboardConfiguration.Tutorial;
+        ChangeTutorialOnStartText(AcroboardConfiguration.Tutorial);
     }
 
     public void ResetConfigurations()
@@ -34,6 +44,7 @@ public class Configuration : BaseVrScene
         PlayerVelocity.SetText($"Velocidade do jogador: {AcroboardConfiguration.PlayerVelocity}");
         PlatformVelocity.SetText($"Velocidade da plataforma: {AcroboardConfiguration.PlatformVelocity}");
         ChangeSpectatorModeText(AcroboardConfiguration.SpectatorMode);
+        ChangeTutorialOnStartText(AcroboardConfiguration.Tutorial);
     }
 
     public void Return()
@@ -43,6 +54,11 @@ public class Configuration : BaseVrScene
 
     private void ChangeSpectatorModeText(bool active)
     {
-        SpectatorButton.SetText($"Modo espectador: {(active ? "on" : "off")}");
+        SpectatorButton.SetText($"Modo espectador: {(active ? ON : OFF)}");
+    }
+
+    private void ChangeTutorialOnStartText(bool active)
+    {
+        TutorialOnStartButton.SetText($"Tutorial ao iniciar: {(active ? ON : OFF)}");
     }
 }

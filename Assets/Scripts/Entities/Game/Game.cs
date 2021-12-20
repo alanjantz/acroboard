@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class Game
 {
     public DateTime StartTime { get; private set; }
-    public bool Paused { get; private set; }
     public string ReportPath { get; set; }
     public bool ReportCreated => !string.IsNullOrEmpty(ReportPath);
     public Queue<Level> Levels { get; private set; } = new Queue<Level>();
@@ -16,9 +15,6 @@ public class Game
         StartTime = startTime;
         Levels = levels;
     }
-
-    public void Pause() => Paused = true;
-    public void Resume() => Paused = false;
 
     public void AddPoints(int pointValue, float amount)
     {

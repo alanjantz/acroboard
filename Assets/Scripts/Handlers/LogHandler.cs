@@ -9,9 +9,12 @@ public class LogHandler : MonoBehaviour
 
     void SaveCurrentStatus()
     {
-        ReportManager.LogStatus(GameHandler.GameStartTime,
-                                Platform.CurrentPlatformHeight,
-                                PlayerStatusReport.GetPlayerLookingDirection(Camera.main.transform.rotation.eulerAngles.x));
+        ReportManager.LogStatus(
+            GameHandler.GameStartTime,
+            Platform.CurrentPlatformHeight,
+            PlayerStatusReport.GetPlayerLookingDirection(
+                Camera.main.transform.rotation.eulerAngles.x)
+            );
     }
 
     void OnApplicationQuit()

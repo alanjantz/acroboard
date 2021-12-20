@@ -14,7 +14,7 @@ public static class LevelGenerator
         [7] = PointRangeGenerator.Generate(8, 65, 85),
     };
 
-    private static readonly List<LevelPointRange> defaultPointRanges = PointRangeGenerator.Generate(5, 1, Platform.MaxHeight);
+    private static readonly List<LevelPointRange> defaultPointRanges = PointRangeGenerator.Generate(5, 1, Platform.CurrentMaxHeight);
 
     public static Queue<Level> Genetare(int amount)
     {

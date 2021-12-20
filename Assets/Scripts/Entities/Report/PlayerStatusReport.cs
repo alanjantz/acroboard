@@ -17,14 +17,14 @@ public class PlayerStatusReport
     public static PlayerLookingDirection GetPlayerLookingDirection(float cameraRotation)
     {
         if (cameraRotation <= 15 || cameraRotation >= 340)
-            return PlayerLookingDirection.Straight;
+            return PlayerLookingDirection.Forward;
 
         if (cameraRotation > 15 && cameraRotation <= 90)
-            return PlayerLookingDirection.Down;
+            return PlayerLookingDirection.Downward;
 
         if (cameraRotation >= 270 && cameraRotation < 340)
-            return PlayerLookingDirection.Up;
+            return PlayerLookingDirection.Upward;
 
-        return PlayerLookingDirection.Straight;
+        return PlayerLookingDirection.Forward;
     }
 }
